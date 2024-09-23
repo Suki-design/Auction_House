@@ -3,12 +3,16 @@
 > Author: 
 
 ## Getting started:
- - Fork project in personal space
- - Clone project on machine
- - Create first issue on GitLab
- - Edit code to address issue
- - Commit by referencing issue number
- - Push commits
+ 
+- [ ] Fork project in personal space
+- [ ] Clone project on machine
+- [ ] Create first issue on GitLab
+- [ ] Edit code to address issue
+- [ ] Commit by referencing issue number
+- [ ] Push commits
+- [ ] Edit README 
+
+Refer to the instructions on published Canvas.
 
 ## Stage 1
 
