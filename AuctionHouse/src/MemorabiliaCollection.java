@@ -12,6 +12,30 @@ public class MemorabiliaCollection {
         items.add(item);
     }
 
+    /**
+     * Displays all memorabilia items in the collection.
+     * Outputs the details of each item to the console.
+     */
+    public void displayAllItems() {
+        if (items.isEmpty()) {
+            System.out.println("The collection is empty.");
+            return;
+        }
+        System.out.println("Items in the collection:");
+        for (Memorabilia item : items) {
+            System.out.println("ID: " + item.getId());
+            System.out.println("Personality Name: " + item.getPersonalityName());
+            System.out.println("Personality Occupation: " + item.getPersonalityOccupation());
+            System.out.println("Object Type: " + item.getObjectType());
+            System.out.println("Is Autographed: " + item.isAutographed());
+            System.out.println("Estimated Year: " + item.getEstimatedYear());
+            System.out.println("Owner: " + item.getOwner());
+            System.out.println("Condition: " + item.getCondition());
+            System.out.println("Starting Price: " + item.getStartingPrice());
+            System.out.println(".........................................");
+        }
+    }
+
     //query methods
 
     public int getNumberOfItems() {
@@ -72,12 +96,4 @@ public class MemorabiliaCollection {
         }
         return owners;
     }
-}
-
-
-
-
-
-
-
-}
+    }
