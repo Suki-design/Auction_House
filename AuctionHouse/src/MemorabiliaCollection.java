@@ -8,8 +8,18 @@ public class MemorabiliaCollection {
         items = new ArrayList<Memorabilia>();
     }
 
-    public void addItem(Memorabilia item) {
-        items.add(item);
+    /**
+     * Adds a Memorabilia item to the collection if it doesn't already exist.
+     *
+     * @param item The Memorabilia item to add.
+     * @return true if the item was added; false if it was a duplicate.
+     */
+    public boolean addItem(Memorabilia item) {
+        if (findById(item.getId()) == null) {
+            items.add(item);
+            return true;
+        }
+        return false;
     }
 
     /**
