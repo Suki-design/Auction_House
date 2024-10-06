@@ -36,6 +36,21 @@ public class MemorabiliaCollection {
         }
     }
 
+    /**
+     * Finds a Memorabilia item by its ID.
+     *
+     * @param id The ID of the item to find.
+     * @return The Memorabilia item if found; null otherwise.
+     */
+    public Memorabilia findById(String id) {
+        for (Memorabilia item : items) {
+            if (item.getId().equals(id)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     //query methods
 
     public int getNumberOfItems() {
