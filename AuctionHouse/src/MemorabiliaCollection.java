@@ -24,7 +24,6 @@ public class MemorabiliaCollection {
 
     /**
      * Displays all memorabilia items in the collection.
-     * Outputs the details of each item to the console.
      */
     public void displayAllItems() {
         if (items.isEmpty()) {
@@ -50,7 +49,7 @@ public class MemorabiliaCollection {
      * Finds a Memorabilia item by its ID.
      *
      * @param id The ID of the item to find.
-     * @return The Memorabilia item if found; null otherwise.
+     * @return The Memorabilia item if found; null if not found.
      */
     public Memorabilia findById(String id) {
         for (Memorabilia item : items) {
@@ -89,15 +88,17 @@ public class MemorabiliaCollection {
         return newest;
     }
 
-    public Memorabilia getMostExpensiveItem() {
+    public String getMostExpensiveItem() {
+        String mostExpensiveId = "";
+        double price = 0.0;
         if (items.isEmpty()) return null;
-        Memorabilia mostExpensive = items.get(0);
         for (Memorabilia item : items) {
-            if (item.getStartingPrice() > mostExpensive.getStartingPrice()) {
-                mostExpensive = item;
+            if (item.getStartingPrice() > price) {
+                price = item.getStartingPrice();
+                mostExpensiveId= item.getId();
             }
         }
-        return mostExpensive;
+        return mostExpensiveId;
     }
 
     public Memorabilia getLeastExpensiveItem() {
