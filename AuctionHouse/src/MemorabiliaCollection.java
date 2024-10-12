@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class MemorabiliaCollection {
     private ArrayList<Memorabilia> items;
@@ -120,4 +122,51 @@ public class MemorabiliaCollection {
         }
         return owners;
     }
+
+    /**
+     * Generates a statistics summary and writes it to a text file.
+     *
+     * @param filename The name of the file to write the summary to.
+     */
+    public void generateStatisticsSummary(String filename) {
+        StringBuilder summary = new StringBuilder();
+
+        // Total number of items
+        summary.append("Total Number of Items: ").append(getNumberOfItems()).append("\n\n");
+
+        // Oldest Item
+        Memorabilia oldestItem = getOldestItem();
+        summary.append("Oldest Item:\n").append(oldestItem.shortDescription()).append("\n\n");
+
+        // Newest Item
+        Memorabilia newestItem = getNewestItem();
+        summary.append("Newest Item:\n").append(newestItem.shortDescription()).append("\n\n");
+
+        // Most Expensive Item
+        Memorabilia mostExpensiveItem = getMostExpensiveItem();
+        summary.append("Most Expensive Item:\n").append(mostExpensiveItem.shortDescription()).append("\n\n");
+
+        // Least Expensive Item
+        Memorabilia leastExpensiveItem = getLeastExpensiveItem();
+        summary.append("Least Expensive Item:\n").append(leastExpensiveItem.shortDescription()).append("\n\n");
+
+        // Write the summary to the specified file
+        writeToFile(filename, summary.toString());
     }
+
+    /**
+     * Writes content to a file.
+     *
+     * @param filename The name of the file.
+     * @param content  The content to write.
+     */
+    private void writeToFile(String filename, String content) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write(content);
+            writer.close();
+            System.out.println("Statistics summary written to " + filename);
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing the statistics summary to file: " + e.getMessage());
+        }
+    }
+}

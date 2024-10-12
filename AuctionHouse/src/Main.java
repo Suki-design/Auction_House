@@ -20,7 +20,6 @@ public class Main{
 
         //load sample data using the loadData method of the dataLoader class
         dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\memorabilia_data.csv", collection);
-
         // Display the number of items
         System.out.println("Total items in collection: " + collection.getNumberOfItems());
 
@@ -57,5 +56,8 @@ public class Main{
 
         //Print out  Unique Owners in the collection
         System.out.println("Unique owners in the collection: " + collection.getUniqueOwners());
+
+        //Generate the statistics summary
+        collection.generateStatisticsSummary("statistics_summary.txt");
     }
     }
