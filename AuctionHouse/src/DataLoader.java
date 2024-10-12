@@ -13,8 +13,29 @@ public class DataLoader {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line); // For initial verification
-                // Parsing will be added in the next step
+                String[] parts = line.split(",");
+                for (int i = 0; i < parts.length; i++) {
+                    parts[i] = parts[i].trim();
+                }
+
+                //parse and create Memorabilia objects
+                //id, personalityName, personalityOccupation, objectType, isAutographed, estimatedYear, owner, condition, startingPrice
+
+                String id = parts[0];
+                String personalityName = parts[1];
+                String personalityOccupation = parts[2];
+                String objectType = parts[3];
+                boolean isAutographed = Boolean.parseBoolean(parts[4]);
+                int estimatedYear = Integer.parseInt(parts[5]);
+                String owner = parts[6];
+                String condition = parts[7];
+                double startingPrice = Double.parseDouble(parts[8]);
+
+                //call the Memorabilia constructor
+                Memorabilia item = new Memorabilia(id, personalityName, personalityOccupation, objectType,isAutographed, estimatedYear, owner, condition, startingPrice);
+                collection.addItem(item);
+
+
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + filename);
