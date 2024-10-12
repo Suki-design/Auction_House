@@ -1,20 +1,20 @@
 001,Elvis Presley,Singer,Guitar,true,1956,Alice,Mint,20000.00
-002,Marilyn Monroe,Actress,Dress,false,1962,Bob,Good,15000.00
-003,Walter White,Actor,Diary,true,2007,Sukat,Good,3000.00
-004,Paul McCartney,Musician,Bass Guitar,true,1965,Emma,Good,16000.00
+002,Marilyn Monroe,Actress,Dress,false,1962,Bob,Restored,15000.00
+003,John Lennon,Singer,Piano,true,1971,David,Restored,18000.00
+004,Paul McCartney,Musician,Bass Guitar,true,1965,Emma,Restored,16000.00
 005,Madonna,Singer,Microphone,true,1985,Ethan,Mint,22000.00
-006,Prince,Musician,Guitar,true,1984,Olivia,Good,19000.00
-007,Bruce Lee,Actor,Nunchaku,true,1972,Noah,Fair,25000.00
+006,Prince,Musician,Guitar,true,1984,Olivia,Restored,19000.00
+007,Bruce Lee,Actor,Nunchaku,true,1972,Noah,Needs Restoring,25000.00
 008,Michael Jackson,Singer,Glove,true,1983,Liam,Mint,30000.00
-009,Adele,Singer,Sheet Music,false,2011,Mason,Good,8000.00
-010,Leonardo DiCaprio,Actor,Script,false,1997,Sophia,Good,12000.00
-011,David Bowie,Musician,Guitar,true,1977,Isabella,Excellent,21000.00
-012,Whitney Houston,Singer,Dress,true,1992,Mia,Good,14000.00
-013,Bob Marley,Musician,Guitar,true,1979,Charlotte,Fair,17000.00
-014,Taylor Swift,Singer,Guitar,false,2014,Amelia,Good,9000.00
-015,Freddie Mercury,Singer,Piano,true,1986,Harper,Excellent,23000.00
+009,Adele,Singer,Sheet Music,false,2011,Mason,Restored,8000.00
+010,Leonardo DiCaprio,Actor,Script,false,1997,Sophia,Restored,12000.00
+011,David Bowie,Musician,Guitar,true,1977,Isabella,Restored,21000.00
+012,Whitney Houston,Singer,Dress,true,1992,Mia,Restored,14000.00
+013,Bob Marley,Musician,Guitar,true,1979,Charlotte,Needs Restoring,17000.00
+014,Taylor Swift,Singer,Guitar,false,2014,Amelia,Restored,9000.00
+015,Freddie Mercury,Singer,Piano,true,1986,Harper,Restored,23000.00
 016,Elton John,Musician,Piano,true,1973,Evelyn,Mint,24000.00
-017,Cher,Singer,Costume,false,1989,Abigail,Good,13000.00
-018,Kurt Cobain,Musician,Guitar,true,1991,Emily,Fair,20000.00
-019,Beyoncé,Singer,Dress,false,2013,Sofia,Good,11000.00
+017,Cher,Singer,Costume,false,1989,Abigail,Restored,13000.00
+018,Kurt Cobain,Musician,Guitar,true,1991,Emily,Needs Restoring,20000.00
+019,Beyoncé,Singer,Dress,false,2013,Sofia,Restored,11000.00
 020,James Dean,Actor,Car,false,1955,Daniel,Mint,35000.00
