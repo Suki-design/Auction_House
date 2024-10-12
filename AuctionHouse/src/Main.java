@@ -3,9 +3,10 @@ public class Main{
     public static void main(String[] args){
 
         MemorabiliaCollection collection = new MemorabiliaCollection();
+        DataLoader dataLoader = new DataLoader();
 
         // Create some memorabilia items
-        Memorabilia item1 = new Memorabilia("001", "Elvis Presley", "Singer", "Guitar", true, 1956, "Alice", "Mint", 20000.00);
+        /*Memorabilia item1 = new Memorabilia("001", "Elvis Presley", "Singer", "Guitar", true, 1956, "Alice", "Mint", 20000.00);
         Memorabilia item2 = new Memorabilia("002", "Marilyn Monroe", "Actress","Dress", false, 1962, "Bob", "Good", 15000.00);
         // Duplicate ID test
         Memorabilia item3 = new Memorabilia("001", "Elvis Presley", "Singer", "Guitar", true, 1956, "Alice", "Mint", 20000.00);
@@ -14,7 +15,11 @@ public class Main{
         collection.addItem(item1);
         collection.addItem(item2);
         collection.addItem(item3);// Attempt to add duplicate
-        collection.addItem(item4);
+        collection.addItem(item4);*/
+
+
+        //load sample data using the loadData method of the dataLoader class
+        dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\memorabilia_data.csv", collection);
 
         // Display the number of items
         System.out.println("Total items in collection: " + collection.getNumberOfItems());
