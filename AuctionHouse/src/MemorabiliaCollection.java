@@ -138,6 +138,23 @@ public class MemorabiliaCollection {
     }
 
     /**
+     * Calculates the standard deviation of starting prices.
+     * Someone solved a similar question on StackOverflow which I have modified to the method below
+     * <a href="https://stackoverflow.com/questions/37930631/standard-deviation-of-an-arraylist">...</a>
+     * @return The standard deviation of starting prices.
+     */
+    private double calculateStandardDeviationStartingPrice() {
+        if (items.isEmpty()) return 0.0;
+        double average = calculateAverageStartingPrice();
+        double sumSquaredDiffs = 0.0;
+        for (Memorabilia item : items) {
+            double diff = item.getStartingPrice() - average;
+            sumSquaredDiffs += diff * diff;
+        }
+        return Math.sqrt(sumSquaredDiffs / items.size());
+    }
+
+    /**
      * Generates a statistics summary and writes it to a text file.
      *
      * @param filename The name of the file to write the summary to.
@@ -167,6 +184,10 @@ public class MemorabiliaCollection {
         //Average Starting Price
         double averagePrice = calculateAverageStartingPrice();
         summary.append("Average Starting Price: $").append(String.format("%.2f", averagePrice)).append("\n\n");
+
+        //Standard Deviation of Starting Prices
+        double stdDeviation = calculateStandardDeviationStartingPrice();
+        summary.append("Standard Deviation of Starting Prices: $").append(String.format("%.2f", stdDeviation)).append("\n\n");
 
         // Write the summary to the specified file
         writeToFile(filename, summary.toString());
