@@ -96,6 +96,11 @@ public class Memorabilia {
         this.startingPrice = startingPrice;
     }
 
+    public String shortDescription() {
+        return "ID: " + id + ", Personality: " + personalityName + ", Object Type: " + objectType + ", Starting Price: $" + String.format("%.2f", startingPrice);
+    }
+
+
 
 
 }
