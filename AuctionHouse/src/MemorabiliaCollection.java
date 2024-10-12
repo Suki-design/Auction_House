@@ -88,17 +88,15 @@ public class MemorabiliaCollection {
         return newest;
     }
 
-    public String getMostExpensiveItem() {
-        String mostExpensiveId = "";
-        double price = 0.0;
+    public Memorabilia getMostExpensiveItem() {
         if (items.isEmpty()) return null;
+        Memorabilia mostExpensive = items.get(0);
         for (Memorabilia item : items) {
-            if (item.getStartingPrice() > price) {
-                price = item.getStartingPrice();
-                mostExpensiveId= item.getId();
+            if (item.getStartingPrice() > mostExpensive.getStartingPrice()) {
+                mostExpensive = item;
             }
         }
-        return mostExpensiveId;
+        return mostExpensive;
     }
 
     public Memorabilia getLeastExpensiveItem() {
