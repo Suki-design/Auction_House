@@ -154,6 +154,31 @@ public class MemorabiliaCollection {
         return Math.sqrt(sumSquaredDiffs / items.size());
     }
 
+    private String getConditionCount() {
+        int mintCount = 0;
+        int restoredCount = 0;
+        int needsRestoringCount = 0;
+
+        for (Memorabilia item : items) {
+            String condition = item.getCondition();
+            if (condition.equals("Mint")) {
+                mintCount++;
+            } else if (condition.equals("Restored")) {
+                restoredCount++;
+            } else if (condition.equals("Needs Restoring")) {
+                needsRestoringCount++;
+            }
+        }
+
+        StringBuilder conditionSummary = new StringBuilder();
+        conditionSummary.append("Mint: ").append(mintCount).append("\n");
+        conditionSummary.append("Restored: ").append(restoredCount).append("\n");
+        conditionSummary.append("Needs Restoring: ").append(needsRestoringCount).append("\n");
+
+        return conditionSummary.toString();
+
+    }
+
     /**
      * Generates a statistics summary and writes it to a text file.
      *
@@ -188,6 +213,10 @@ public class MemorabiliaCollection {
         //Standard Deviation of Starting Prices
         double stdDeviation = calculateStandardDeviationStartingPrice();
         summary.append("Standard Deviation of Starting Prices: $").append(String.format("%.2f", stdDeviation)).append("\n\n");
+
+        //Call method to get counts by condition
+        String conditionSummary = getConditionCount();
+        summary.append("Items by Condition:\n").append(conditionSummary);
 
         // Write the summary to the specified file
         writeToFile(filename, summary.toString());
