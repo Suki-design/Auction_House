@@ -124,6 +124,20 @@ public class MemorabiliaCollection {
     }
 
     /**
+     * Calculates the average starting price of all items in the collection.
+     *
+     * @return The average starting price.
+     */
+    private double calculateAverageStartingPrice() {
+        if (items.isEmpty()) return 0.0;
+        double total = 0.0;
+        for (Memorabilia item : items) {
+            total += item.getStartingPrice();
+        }
+        return total / items.size();
+    }
+
+    /**
      * Generates a statistics summary and writes it to a text file.
      *
      * @param filename The name of the file to write the summary to.
@@ -149,6 +163,10 @@ public class MemorabiliaCollection {
         // Least Expensive Item
         Memorabilia leastExpensiveItem = getLeastExpensiveItem();
         summary.append("Least Expensive Item:\n").append(leastExpensiveItem.shortDescription()).append("\n\n");
+
+        //Average Starting Price
+        double averagePrice = calculateAverageStartingPrice();
+        summary.append("Average Starting Price: $").append(String.format("%.2f", averagePrice)).append("\n\n");
 
         // Write the summary to the specified file
         writeToFile(filename, summary.toString());
