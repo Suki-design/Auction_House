@@ -27,39 +27,14 @@ public class Main{
         //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\invalid_numbers.csv", collection);
         //4. unexpected condition category values
         // dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\unexpected_values.csv", collection);
+
+
         // Display the number of items
         System.out.println("Total items in collection: " + collection.getNumberOfItems());
 
 
         // Display all items using displayAllItems method
         collection.displayAllItems();
-
-        //Print out  Oldest Item
-        Memorabilia oldestItem = collection.getOldestItem();
-        if (oldestItem != null) {
-            System.out.println("Oldest Item ID: " + oldestItem.getId());
-        } else {
-            System.out.println("The collection is empty.");
-        };
-
-        //Print out Newest Item
-        Memorabilia newestItem = collection.getNewestItem();
-        if (newestItem != null) {
-            System.out.println("Newest Item ID: " + newestItem.getId());
-        } else {
-            System.out.println("The collection is empty.");
-        };
-
-        //Print out Least Expensive Item
-        Memorabilia leastExpensiveItem = collection.getLeastExpensiveItem();
-        if (leastExpensiveItem != null) {
-            System.out.println("Least Expensive Item ID: " + leastExpensiveItem.getId());
-        } else {
-            System.out.println("The collection is empty.");
-        }
-
-        //Print out Most Expensive Item
-        System.out.println("Most Expensive Item in the collection: " +collection.getMostExpensiveItem());
 
         //Print out  Unique Owners in the collection
         System.out.println("Unique owners in the collection: " + collection.getUniqueOwners());
