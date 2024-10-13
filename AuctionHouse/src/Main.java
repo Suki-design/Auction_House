@@ -19,7 +19,14 @@ public class Main{
 
 
         //load sample data using the loadData method of the dataLoader class
-        dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\memorabilia_data.csv", collection);
+        //1. Non-corrupted csv
+        //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\memorabilia_data.csv", collection);
+        //2. file with some missing fields
+        //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\missing_fields.csv", collection);
+        //3. File with strings instead of numbers
+        //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\invalid_numbers.csv", collection);
+        //4. unexpected condition category values
+        // dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\unexpected_values.csv", collection);
         // Display the number of items
         System.out.println("Total items in collection: " + collection.getNumberOfItems());
 
