@@ -52,8 +52,8 @@ public class DataLoader {
                     }
                     String owner = parts[6];
                     String condition = parts[7];
-                    //Validate 'condition' to ensure it matches expected set values
 
+                    //Validate 'condition' to ensure it matches expected set values
                     if (!condition.equals("Mint") && !condition.equals("Restored") && !condition.equals("Needs Restoring")) {
                         throw new IllegalArgumentException("Invalid condition: " + condition);
                     }
