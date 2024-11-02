@@ -1,68 +1,47 @@
-public class Memorabilia {
-    private String id;
+/**
+ * Represents a memorabilia item, which is a type of Collectible.
+ * Contains specific attributes related to memorabilia items.
+ */
+public class Memorabilia extends Collectible {
     private String personalityName;
     private String personalityOccupation;
     private String objectType;
     private boolean isAutographed;
-    private int estimatedYear;
-    private String owner;
-    private String condition;
-    private double startingPrice;
 
-    //Constructor for the class
-    public Memorabilia(String id, String personalityName, String personalityOccupation,
-                       String objectType, boolean isAutographed, int estimatedYear,
-                       String owner, String condition, double startingPrice) {
-        this.id = id;
+    /**
+     * Constructs a new Memorabilia object with the specified details.
+     *
+     * @param id                    The unique identifier of the item.
+     * @param owner                 The current owner of the item.
+     * @param condition             The condition of the item ("Mint", "Restored", "Needs Restoring").
+     * @param startingPrice         The starting price for the auction.
+     * @param yearEstimate          The estimated years of the item's origin.
+     * @param personalityName       The name of the associated personality.
+     * @param personalityOccupation The occupation of the personality.
+     * @param objectType            The type of object.
+     * @param isAutographed         True if the item is autographed; false otherwise.
+     */
+    public Memorabilia(String id, String owner, String condition, double startingPrice, YearEstimate yearEstimate,
+                       String personalityName, String personalityOccupation, String objectType, boolean isAutographed) {
+        super(id, owner, condition, startingPrice, yearEstimate);
         this.personalityName = personalityName;
         this.personalityOccupation = personalityOccupation;
         this.objectType = objectType;
         this.isAutographed = isAutographed;
-        this.estimatedYear = estimatedYear;
-        this.owner = owner;
-        this.condition = condition;
-        this.startingPrice = startingPrice;
     }
 
-    //Get Methods
-    public String getId(){
-        return id;
-    }
-
-    public String getPersonalityName(){
+    //Get and set Methods
+    public String getPersonalityName() {
         return personalityName;
     }
 
-    public String getPersonalityOccupation(){
+    public String getPersonalityOccupation() {
         return personalityOccupation;
     }
 
-    public String getObjectType(){
+    public String getObjectType() {
         return objectType;
     }
-
-    public boolean isAutographed(){
-        return isAutographed;
-    }
-
-    public int getEstimatedYear(){
-        return estimatedYear;
-    }
-
-    public String getOwner(){
-        return owner;
-    }
-
-    public String getCondition(){
-        return condition;
-    }
-
-    public double getStartingPrice(){
-        return startingPrice;
-    }
-
-    //Set Methods
-    //Did not create set method for Id to avoid clashes in unique Id values
 
     public void setPersonalityName(String personalityName) {
         this.personalityName = personalityName;
@@ -76,32 +55,43 @@ public class Memorabilia {
         this.objectType = objectType;
     }
 
-    public void setIsAutographed(boolean isAutographed) {
+    public void setAutographed(boolean isAutographed) {
         this.isAutographed = isAutographed;
     }
 
-    public void setEstimatedYear(int estimatedYear) {
-        this.estimatedYear = estimatedYear;
+    /**
+     * Checks if the item is autographed.
+     *
+     * @return True if autographed; false otherwise.
+     */
+    public boolean isAutographed() {
+        return isAutographed;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
+    // Overridden Methods
 
-    public void setStartingPrice(double startingPrice) {
-        this.startingPrice = startingPrice;
-    }
-
+    /**
+     * Provides a short description of the memorabilia item.
+     *
+     * @return A string containing the item's ID and a brief description.
+     */
+    @Override
     public String shortDescription() {
-        return "ID: " + id + ", Personality: " + personalityName + ", Object Type: " + objectType + ", Starting Price: $" + String.format("%.2f", startingPrice);
+        return "Memorabilia [ID: " + getId() + ", " + personalityName + "'s " + objectType + "]";
     }
 
-
-
-
+    /**
+     * Returns a string representation of the memorabilia item, including all attributes.
+     *
+     * @return A detailed string containing all attributes of the item.
+     */
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", Personality Name: " + personalityName +
+                ", Personality Occupation: " + personalityOccupation +
+                ", Object Type: " + objectType +
+                ", Autographed: " + isAutographed;
+    }
 }
-
