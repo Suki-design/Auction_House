@@ -1,4 +1,6 @@
-001,Elvis Presley,Singer,Guitar,true,1956,Alice,Mint
-002,Marilyn Monroe,Actress,Dress,false,1962,Bob
-003,John Lennon,Singer,Piano,true,1971,David,Restored
-004,Paul McCartney,Musician,Bass Guitar,true,1965,Emma,Restored,16000.00
+Memorabilia,021,Albert Einstein,Scientist,false,1930,1935,Grace,Restored,12000.00
+Toy,022,Action Figure,1985,1990,Hank,Mint,400.00
+VinylRecord,023,Thriller,Michael Jackson,,Bob,Mint,1500.00
+Sculpture,008,David,Bronze,1.75,1500,1510,David,Mint,7500.00
+Memorabilia,025,Elvis Presley,Singer,Guitar,true,1950,,Mint
+Toy,026,Model,Ivy,Restored,3500.00

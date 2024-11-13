@@ -1,4 +1,8 @@
-001,Madonna,Singer,Microphone,true,1985,Ethan,Pristine,22000.00
-002,Prince,Musician,Guitar,true,1984,Olivia,Excellent,19000.00
-003,Bruce Lee,Actor,Nunchaku,true,1972,Noah,Needs Restoring,25000.00
-004,Michael Jackson,Singer,Glove,true,1983,Liam,200,30000.00
+Memorabilia,033,Bruce Lee,Martial Artist,Uniform,false,1970,1975,Eve,Excellent,18000.00
+Toy,034,Barbie Dreamhouse,Toy,Barbie,2010,2015,Frank,Good,3500.00,LEGO Star Wars Collection
+VinylRecord,035,The Dark Side of the Moon,Pink Floyd,Progressive Rock,12,1973,1978,Grace,Pristine,3000.00
+Sculpture,036,Venus de Milo,Marble,2.0,1500,1505,Hank,Excellent,8000.00
+Memorabilia,037,Albert Einstein,Scientist,Notebook,false,1930,1935,Ivy,Poor,12000.00
+Toy,038,Action Figure,Star Wars Action Figure,1985,1990,Grace,Fair,2500.00,Star Wars Collection
+VinylRecord,039,Abbey Road,The Beatles,Rock,12,1969,1973,Ivy,Good,2200.00
+Sculpture,040,The Kiss,Bronze,1.5,1900,1905,Hank,Fair,9000.00
