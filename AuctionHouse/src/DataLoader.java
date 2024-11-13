@@ -11,7 +11,7 @@ public class DataLoader {
      * Loads data from a CSV file and adds Memorabilia items to the given collection.
      *
      * @param filename   The path to the CSV file.
-     * @param collection The MemorabiliaCollection to add items to.
+     * @param collection The CollectibleCollection to add items to.
      */
     public void loadData(String filename, CollectibleCollection collection) {
         // List to collect error messages encountered during parsing of file
@@ -22,11 +22,6 @@ public class DataLoader {
 
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
-            // Read the header line first and ignore it
-            if ((line = br.readLine()) != null) {
-                lineNumber++;
-                // Optionally, validate the header here
-            }
 
             while ((line = br.readLine()) != null) {
                 lineNumber++;
