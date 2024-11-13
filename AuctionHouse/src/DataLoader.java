@@ -13,95 +13,75 @@ public class DataLoader {
      * @param filename   The path to the CSV file.
      * @param collection The MemorabiliaCollection to add items to.
      */
-    public void loadData(String filename, MemorabiliaCollection collection) {
-        //List to collect error messages encountered during parsing of file
+    public void loadData(String filename, CollectibleCollection collection) {
+        // List to collect error messages encountered during parsing of file
         List<String> errors = new ArrayList<>();
 
-        //variable to keep track of the current line number
-        int lineNumber =0;
+        // Variable to keep track of the current line number
+        int lineNumber = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
+            // Read the header line first and ignore it
+            if ((line = br.readLine()) != null) {
+                lineNumber++;
+                // Optionally, validate the header here
+            }
+
             while ((line = br.readLine()) != null) {
-                lineNumber ++;
-                //split the line by commas to separate fields
+                lineNumber++;
+                // Skip empty lines
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
+                // Split the line by commas to separate fields
                 String[] parts = line.split(",");
-                //Trim whitespace from each field
+                // Trim whitespace from each field
                 for (int i = 0; i < parts.length; i++) {
                     parts[i] = parts[i].trim();
                 }
 
-                //this block checks if the line has the expected number of fields (9)
                 try {
-                    if (parts.length < 9) {
-                        throw new IllegalArgumentException("Missing fields");
-                    }
+                    // Create Collectible object using the factory
+                    Collectible item = CollectibleCreator.createCollectible(parts);
 
-                    //parse and create Memorabilia objects
-                    //id, personalityName, personalityOccupation, objectType, isAutographed, estimatedYear, owner, condition, startingPrice
-                    String id = parts[0];
-                    String personalityName = parts[1];
-                    String personalityOccupation = parts[2];
-                    String objectType = parts[3];
-                    boolean isAutographed = Boolean.parseBoolean(parts[4]);
-                    int estimatedYear;
-                    try {
-                        estimatedYear = Integer.parseInt(parts[5]);
-                    } catch (NumberFormatException e) {
-                        throw new NumberFormatException("Invalid estimated year: " + parts[5]);
-                    }
-                    String owner = parts[6];
-                    String condition = parts[7];
-
-                    //Validate 'condition' to ensure it matches expected set values
-                    if (!condition.equals("Mint") && !condition.equals("Restored") && !condition.equals("Needs Restoring")) {
-                        throw new IllegalArgumentException("Invalid condition: " + condition);
-                    }
-
-                    double startingPrice;
-                    //handle invalid number format
-                    try {
-                        startingPrice = Double.parseDouble(parts[8]);
-                    } catch (NumberFormatException e) {
-                        throw new NumberFormatException("Invalid starting price: " + parts[8]);
-                    }
-
-                    //call the Memorabilia constructor to create new Memorabila object
-                    Memorabilia item = new Memorabilia(id, personalityName, personalityOccupation, objectType, isAutographed, estimatedYear, owner, condition, startingPrice);
-
+                    // Attempt to add the item to the collection
                     if (!collection.addItem(item)) {
-                        String errorMsg = "Line" + lineNumber + ": Duplicate item ID: " + id;
+                        String errorMsg = "Line " + lineNumber + ": Duplicate item ID: " + item.getId();
                         errors.add(errorMsg);
                     }
-
-                }catch (NumberFormatException e) {
-                    //catch invalid number format
-                    String errorMsg = "line " + lineNumber + ": " + e.getMessage();
+                } catch (NumberFormatException e) {
+                    // Catch invalid number format
+                    String errorMsg = "Line " + lineNumber + ": " + e.getMessage();
                     errors.add(errorMsg);
-                }catch (IllegalArgumentException e){
-                    //catch missing fields and Invalid condition values
-                    String errorMsg = "Line "+ lineNumber + ": " + e.getMessage();
+                } catch (IllegalArgumentException e) {
+                    // Catch missing fields, invalid types, and invalid condition values
+                    String errorMsg = "Line " + lineNumber + ": " + e.getMessage();
                     errors.add(errorMsg);
-                }catch (Exception e){
-                    //catch all other exceptions
-                    String errorMsg= "Line "+ lineNumber + ": Unexpected error during parsing "+ e.getMessage();
+                } catch (Exception e) {
+                    // Catch all other exceptions
+                    String errorMsg = "Line " + lineNumber + ": Unexpected error during parsing - " + e.getMessage();
                     errors.add(errorMsg);
                 }
-                }
+            }
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + filename);
+            return; // Exit the method as there's no data to load
         } catch (IOException e) {
-            //Other I/O exception handling
+            // Other I/O exception handling
             e.printStackTrace();
+            return; // Exit the method as an I/O error occurred
         }
 
-        //display collected errors to the user
-        if(!errors.isEmpty()){
-            System.out.println(" These errors were encountered while loading data from "+ filename +": ");
-            for (String error: errors){
+        // Display collected errors to the user
+        if (!errors.isEmpty()) {
+            System.out.println("Errors encountered while loading data from " + filename + ":");
+            for (String error : errors) {
                 System.out.println(error);
             }
+        } else {
+            System.out.println("Data loading completed successfully. Total items loaded: " + collection.getNumberOfItems());
         }
-
     }
 }
