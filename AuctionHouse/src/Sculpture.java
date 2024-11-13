@@ -91,7 +91,7 @@ public class Sculpture extends Collectible {
         final int EXPECTED_ATTRIBUTES = 10; // Including Type
 
         if (data.length != EXPECTED_ATTRIBUTES) {
-            throw new IllegalArgumentException("Invalid number of attributes for Sculpture. Expected "
+            throw new IllegalArgumentException("Missing fields for Sculpture. Expected "
                     + EXPECTED_ATTRIBUTES + ", got " + data.length + ".");
         }
 
@@ -147,8 +147,8 @@ public class Sculpture extends Collectible {
 
             return new Sculpture(id, owner, condition, startingPrice, yearEstimate,
                     subject, material, height);
-        } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Missing attributes for Sculpture: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid number format in Toy data: " + e.getMessage());
         }
     }
 

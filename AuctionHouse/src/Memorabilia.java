@@ -97,7 +97,7 @@ public class Memorabilia extends Collectible {
         final int EXPECTED_ATTRIBUTES = 11; // Including Type
 
         if (data.length != EXPECTED_ATTRIBUTES) {
-            throw new IllegalArgumentException("Invalid number of attributes for Memorabilia. Expected "
+            throw new IllegalArgumentException("Missing fields for Memorabilia. Expected "
                     + EXPECTED_ATTRIBUTES + ", got " + data.length + ".");
         }
 
@@ -139,13 +139,11 @@ public class Memorabilia extends Collectible {
 
             return new Memorabilia(id, owner, condition, startingPrice, yearEstimate,
                     personalityName, personalityOccupation, objectType, isAutographed);
+
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid number format in Memorabilia data: " + e.getMessage());
-        } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Missing attributes for Memorabilia: " + e.getMessage());
         }
     }
-
     /**
      * Returns a string representation of the memorabilia.
      *

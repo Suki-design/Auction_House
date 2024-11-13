@@ -102,7 +102,7 @@ public class VinylRecord extends Collectible {
         final int EXPECTED_ATTRIBUTES = 11; // Including Type
 
         if (data.length != EXPECTED_ATTRIBUTES) {
-            throw new IllegalArgumentException("Invalid number of attributes for VinylRecord. Expected "
+            throw new IllegalArgumentException("Missing fields for VinylRecord. Expected "
                     + EXPECTED_ATTRIBUTES + ", got " + data.length + ".");
         }
 
@@ -159,8 +159,8 @@ public class VinylRecord extends Collectible {
 
             return new VinylRecord(id, owner, condition, startingPrice, yearEstimate,
                     albumName, artist, musicGenre, diameter);
-        } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Missing attributes for VinylRecord: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid number format in Toy data: " + e.getMessage());
         }
     }
 
