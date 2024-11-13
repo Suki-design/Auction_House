@@ -21,6 +21,7 @@ public class CollectibleCollection {
      *
      * @param item The Collectible item to add.
      * @return true if the item was added; false if it was a duplicate.
+     * @throws IllegalArgumentException If the item is null.
      */
     public boolean addItem(Collectible item) {
         if (item == null) {
@@ -79,7 +80,7 @@ public class CollectibleCollection {
      *
      * @return The oldest Collectible item.
      */
-    public Collectible getOldestItem() {
+    public Collectible getOldestByLowEstimate() {
         Collectible oldest = null;
         int oldestLowEstimate = 0;
 
@@ -98,7 +99,7 @@ public class CollectibleCollection {
      *
      * @return The newest Collectible item.
      */
-    public Collectible getNewestItem() {
+    public Collectible getNewestByHighEstimate() {
         Collectible newest = null;
         int newestHighEstimate = 0;
 
@@ -107,6 +108,44 @@ public class CollectibleCollection {
             if (newest == null || itemHighEstimate > newestHighEstimate) {
                 newest = item;
                 newestHighEstimate = itemHighEstimate;
+            }
+        }
+        return newest;
+    }
+
+    /**
+     * Gets the oldest item based on the middle year estimate.
+     *
+     * @return The oldest Collectible item by middle estimate.
+     */
+    public Collectible getOldestByMiddleEstimate() {
+        Collectible oldest = null;
+        int oldestMiddleEstimate = 0;
+
+        for (Collectible item : items) {
+            int itemMiddleEstimate = item.getYearEstimate().getMiddleEstimate();
+            if (oldest == null || itemMiddleEstimate < oldestMiddleEstimate) {
+                oldest = item;
+                oldestMiddleEstimate = itemMiddleEstimate;
+            }
+        }
+        return oldest;
+    }
+
+    /**
+     * Gets the newest item based on the middle year estimate.
+     *
+     * @return The newest Collectible item by middle estimate.
+     */
+    public Collectible getNewestByMiddleEstimate() {
+        Collectible newest = null;
+        int newestMiddleEstimate = 0;
+
+        for (Collectible item : items) {
+            int itemMiddleEstimate = item.getYearEstimate().getMiddleEstimate();
+            if (newest == null || itemMiddleEstimate > newestMiddleEstimate) {
+                newest = item;
+                newestMiddleEstimate = itemMiddleEstimate;
             }
         }
         return newest;
@@ -237,28 +276,50 @@ public class CollectibleCollection {
         int totalItems = getNumberOfItems();
         summary.append("Total Number of Items: ").append(totalItems).append("\n\n");
 
-        // Oldest Item
-        Collectible oldestItem = getOldestItem();
-        if (oldestItem != null) {
-            YearEstimate oldestYearEstimate = oldestItem.getYearEstimate();
-            int middleEstimate = oldestYearEstimate.getMiddleEstimate();
-            summary.append("Oldest Item:\n")
-                    .append(oldestItem.shortDescription())
-                    .append(" (Year: ").append(middleEstimate).append(")\n\n");
+        // Oldest Item by Low Estimate
+        Collectible oldestByLow = getOldestByLowEstimate();
+        if (oldestByLow != null) {
+            YearEstimate oldestLowYear = oldestByLow.getYearEstimate();
+            summary.append("Oldest Item (Low Estimate):\n")
+                    .append(oldestByLow.shortDescription())
+                    .append(" (Year: ").append(oldestLowYear.getLowEstimate()).append(")\n\n");
         } else {
-            summary.append("Oldest Item:\nNo data available.\n\n");
+            summary.append("Oldest Item (Low Estimate):\nNo data available.\n\n");
         }
 
-        // Newest Item
-        Collectible newestItem = getNewestItem();
-        if (newestItem != null) {
-            YearEstimate newestYearEstimate = newestItem.getYearEstimate();
-            int middleEstimate = newestYearEstimate.getMiddleEstimate();
-            summary.append("Newest Item:\n")
-                    .append(newestItem.shortDescription())
+        // Newest Item by High Estimate
+        Collectible newestByHigh = getNewestByHighEstimate();
+        if (newestByHigh != null) {
+            YearEstimate newestHighYear = newestByHigh.getYearEstimate();
+            summary.append("Newest Item (High Estimate):\n")
+                    .append(newestByHigh.shortDescription())
+                    .append(" (Year: ").append(newestHighYear.getHighEstimate()).append(")\n\n");
+        } else {
+            summary.append("Newest Item (High Estimate):\nNo data available.\n\n");
+        }
+
+        // Oldest Item by Middle Estimate
+        Collectible oldestByMiddle = getOldestByMiddleEstimate();
+        if (oldestByMiddle != null) {
+            YearEstimate oldestMiddleYear = oldestByMiddle.getYearEstimate();
+            int middleEstimate = oldestMiddleYear.getMiddleEstimate();
+            summary.append("Oldest Item (Middle Estimate):\n")
+                    .append(oldestByMiddle.shortDescription())
                     .append(" (Year: ").append(middleEstimate).append(")\n\n");
         } else {
-            summary.append("Newest Item:\nNo data available.\n\n");
+            summary.append("Oldest Item (Middle Estimate):\nNo data available.\n\n");
+        }
+
+        // Newest Item by Middle Estimate
+        Collectible newestByMiddle = getNewestByMiddleEstimate();
+        if (newestByMiddle != null) {
+            YearEstimate newestMiddleYear = newestByMiddle.getYearEstimate();
+            int middleEstimate = newestMiddleYear.getMiddleEstimate();
+            summary.append("Newest Item (Middle Estimate):\n")
+                    .append(newestByMiddle.shortDescription())
+                    .append(" (Year: ").append(middleEstimate).append(")\n\n");
+        } else {
+            summary.append("Newest Item (Middle Estimate):\nNo data available.\n\n");
         }
 
         // Most Expensive Item
