@@ -87,9 +87,87 @@ public class VinylRecord extends Collectible {
     }
 
     /**
-     * Returns a string representation of the vinyl record, including all attributes.
+     * Parses a VinylRecord object from CSV data.
      *
-     * @return A detailed string containing all attributes of the item.
+     * @param data An array of strings representing the CSV fields.
+     * @return A VinylRecord object.
+     * @throws IllegalArgumentException If data is invalid or insufficient.
+     */
+    public static VinylRecord fromCSV(String[] data) throws IllegalArgumentException {
+        // Expected CSV Format for VinylRecord:
+        // Type,ID,AlbumName,Artist,MusicGenre,Diameter,LowEstimate,HighEstimate,Owner,Condition,StartingPrice
+        // Example:
+        // VinylRecord,004,Thriller,Michael Jackson,Pop,12,1982,1987,Bob,Mint,1500.00
+
+        final int EXPECTED_ATTRIBUTES = 11; // Including Type
+
+        if (data.length != EXPECTED_ATTRIBUTES) {
+            throw new IllegalArgumentException("Invalid number of attributes for VinylRecord. Expected "
+                    + EXPECTED_ATTRIBUTES + ", got " + data.length + ".");
+        }
+
+        try {
+            String id = data[1].trim();
+            String albumName = data[2].trim();
+            String artist = data[3].trim();
+            String musicGenre = data[4].trim();
+
+            // Parse integer for diameter
+            int diameter;
+            try {
+                diameter = Integer.parseInt(data[5].trim());
+                if (diameter <= 0) {
+                    throw new IllegalArgumentException("Diameter must be a positive value.");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid diameter: " + data[5]);
+            }
+
+            // Parse integers for estimates
+            int lowEstimate;
+            int highEstimate;
+            try {
+                lowEstimate = Integer.parseInt(data[6].trim());
+                highEstimate = Integer.parseInt(data[7].trim());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid year estimate values: " + e.getMessage());
+            }
+
+            String owner = data[8].trim();
+            String condition = data[9].trim();
+
+            // Validate 'condition'
+            if (!condition.equalsIgnoreCase("Mint") &&
+                    !condition.equalsIgnoreCase("Restored") &&
+                    !condition.equalsIgnoreCase("Needs Restoring")) {
+                throw new IllegalArgumentException("Invalid condition: " + condition);
+            }
+
+            // Parse starting price
+            double startingPrice;
+            try {
+                startingPrice = Double.parseDouble(data[10].trim());
+                if (startingPrice < 0) {
+                    throw new IllegalArgumentException("Starting price cannot be negative.");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid starting price: " + data[10]);
+            }
+
+            // Create YearEstimate object
+            YearEstimate yearEstimate = new YearEstimate(lowEstimate, highEstimate);
+
+            return new VinylRecord(id, owner, condition, startingPrice, yearEstimate,
+                    albumName, artist, musicGenre, diameter);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Missing attributes for VinylRecord: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Returns a string representation of the vinyl record.
+     *
+     * @return A detailed string containing all attributes of the vinyl record.
      */
     @Override
     public String toString() {

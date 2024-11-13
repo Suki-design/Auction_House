@@ -76,9 +76,86 @@ public class Sculpture extends Collectible {
     }
 
     /**
-     * Returns a string representation of the sculpture, including all attributes.
+     * Parses a Sculpture object from CSV data.
      *
-     * @return A detailed string containing all attributes of the item.
+     * @param data An array of strings representing the CSV fields.
+     * @return A Sculpture object.
+     * @throws IllegalArgumentException If data is invalid or insufficient.
+     */
+    public static Sculpture fromCSV(String[] data) throws IllegalArgumentException {
+        // Expected CSV Format for Sculpture:
+        // Type,ID,Subject,Material,Height,LowEstimate,HighEstimate,Owner,Condition,StartingPrice
+        // Example:
+        // Sculpture,005,The Thinker,Marble,1.8,1900,1905,Carol,Restored,5000.00
+
+        final int EXPECTED_ATTRIBUTES = 10; // Including Type
+
+        if (data.length != EXPECTED_ATTRIBUTES) {
+            throw new IllegalArgumentException("Invalid number of attributes for Sculpture. Expected "
+                    + EXPECTED_ATTRIBUTES + ", got " + data.length + ".");
+        }
+
+        try {
+            String id = data[1].trim();
+            String subject = data[2].trim();
+            String material = data[3].trim();
+
+            // Parse double for height
+            double height;
+            try {
+                height = Double.parseDouble(data[4].trim());
+                if (height <= 0) {
+                    throw new IllegalArgumentException("Height must be a positive value.");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid height: " + data[4]);
+            }
+
+            // Parse integers for estimates
+            int lowEstimate;
+            int highEstimate;
+            try {
+                lowEstimate = Integer.parseInt(data[5].trim());
+                highEstimate = Integer.parseInt(data[6].trim());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid year estimate values: " + e.getMessage());
+            }
+
+            String owner = data[7].trim();
+            String condition = data[8].trim();
+
+            // Validate 'condition'
+            if (!condition.equalsIgnoreCase("Mint") &&
+                    !condition.equalsIgnoreCase("Restored") &&
+                    !condition.equalsIgnoreCase("Needs Restoring")) {
+                throw new IllegalArgumentException("Invalid condition: " + condition);
+            }
+
+            // Parse starting price
+            double startingPrice;
+            try {
+                startingPrice = Double.parseDouble(data[9].trim());
+                if (startingPrice < 0) {
+                    throw new IllegalArgumentException("Starting price cannot be negative.");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid starting price: " + data[9]);
+            }
+
+            // Create YearEstimate object
+            YearEstimate yearEstimate = new YearEstimate(lowEstimate, highEstimate);
+
+            return new Sculpture(id, owner, condition, startingPrice, yearEstimate,
+                    subject, material, height);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Missing attributes for Sculpture: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Returns a string representation of the sculpture.
+     *
+     * @return A detailed string containing all attributes of the sculpture.
      */
     @Override
     public String toString() {

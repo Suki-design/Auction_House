@@ -82,15 +82,80 @@ public class Memorabilia extends Collectible {
     }
 
     /**
-     * Returns a string representation of the memorabilia item, including all attributes.
+     * Parses a Memorabilia object from CSV data.
      *
-     * @return A detailed string containing all attributes of the item.
+     * @param data An array of strings representing the CSV fields.
+     * @return A Memorabilia object.
+     * @throws IllegalArgumentException If data is invalid or insufficient.
+     */
+    public static Memorabilia fromCSV(String[] data) throws IllegalArgumentException {
+        // Expected CSV Format for Memorabilia:
+        // Type,ID,PersonalityName,PersonalityOccupation,ObjectType,IsAutographed,LowEstimate,HighEstimate,Owner,Condition,StartingPrice
+        // Example:
+        // Memorabilia,001,Elvis Presley,Singer,Guitar,true,1950,1956,Alice,Mint,20000.00
+
+        final int EXPECTED_ATTRIBUTES = 11; // Including Type
+
+        if (data.length != EXPECTED_ATTRIBUTES) {
+            throw new IllegalArgumentException("Invalid number of attributes for Memorabilia. Expected "
+                    + EXPECTED_ATTRIBUTES + ", got " + data.length + ".");
+        }
+
+        try {
+            // Parse common fields from the superclass
+            String id = data[1].trim();
+            String owner = data[8].trim();
+            String condition = data[9].trim();
+            double startingPrice = Double.parseDouble(data[10].trim());
+
+            // Validate 'condition'
+            if (!condition.equalsIgnoreCase("Mint") &&
+                    !condition.equalsIgnoreCase("Restored") &&
+                    !condition.equalsIgnoreCase("Needs Restoring")) {
+                throw new IllegalArgumentException("Invalid condition: " + condition);
+            }
+
+            // Parse year estimates
+            int lowEstimate = Integer.parseInt(data[6].trim());
+            int highEstimate = Integer.parseInt(data[7].trim());
+
+            YearEstimate yearEstimate = new YearEstimate(lowEstimate, highEstimate);
+
+            // Parse specific fields
+            String personalityName = data[2].trim();
+            String personalityOccupation = data[3].trim();
+            String objectType = data[4].trim();
+
+            // Parse boolean for isAutographed
+            String isAutographedStr = data[5].trim().toLowerCase();
+            boolean isAutographed;
+            if (isAutographedStr.equals("true") || isAutographedStr.equals("yes")) {
+                isAutographed = true;
+            } else if (isAutographedStr.equals("false") || isAutographedStr.equals("no")) {
+                isAutographed = false;
+            } else {
+                throw new IllegalArgumentException("Invalid value for isAutographed: " + data[5]);
+            }
+
+            return new Memorabilia(id, owner, condition, startingPrice, yearEstimate,
+                    personalityName, personalityOccupation, objectType, isAutographed);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid number format in Memorabilia data: " + e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Missing attributes for Memorabilia: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Returns a string representation of the memorabilia.
+     *
+     * @return A detailed string containing all attributes of the memorabilia.
      */
     @Override
     public String toString() {
         return super.toString() +
                 ", Personality Name: " + personalityName +
-                ", Personality Occupation: " + personalityOccupation +
+                ", Occupation: " + personalityOccupation +
                 ", Object Type: " + objectType +
                 ", Autographed: " + isAutographed;
     }
