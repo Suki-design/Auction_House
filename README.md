@@ -59,9 +59,31 @@ File I/O and Error Handling
 
 
 ## Stage 3
+Refactoring and Class Hierarchy
 
-Design notes...
+**Collectible Class (Abstract Superclass)**
 
+- Introduced as a common structure for various collectible items.
+
+**YearEstimate Class**
+
+- Represents the estimated year range for collectibles,having a composition relationship with the Collectible class.
+
+**Subclass Implementations**
+
+- Developed subclasses: VinylRecord, Toy, Sculpture, and Memorabilia, each with specific attributes and a description method.
+
+**CollectibleCollection Class**
+
+- Renamed from MemorabiliaCollection to manage a collection of Collectible items, with updated methods to support the new hierarchy.
+
+**DataLoader and Creator Classes**
+
+- Refactored DataLoader to support various Collectible subclasses, not just Memorabilia.
+- Introduced a Creator class to handle the instantiation of different Collectible subclasses based on data input.
+
+**UML Design**
+- Updated the UML class diagram to reflect new structure.
 ## Stage 4
 
 Design notes...
