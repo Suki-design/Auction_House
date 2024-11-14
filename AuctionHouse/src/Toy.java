@@ -13,14 +13,15 @@ public class Toy extends Collectible {
      * @param owner          The current owner of the item.
      * @param condition      The condition of the item.
      * @param startingPrice  The starting price for the auction.
-     * @param yearEstimate   The estimated years of the item's origin.
+     * @param lowEstimate   The lower bound of the year estimate.
+     * @param highEstimate  The upper bound of the year estimate.
      * @param typeOfToy      The type of toy (e.g., car, figurine).
      * @param name           The name of the toy.
      * @param collectionName The name of the collection (optional).
      */
-    public Toy(String id, String owner, String condition, double startingPrice, YearEstimate yearEstimate,
-               String typeOfToy, String name, String collectionName) {
-        super(id, owner, condition, startingPrice, yearEstimate);
+    public Toy(String id, String owner, String condition, double startingPrice, int lowEstimate, int highEstimate,
+    String typeOfToy, String name, String collectionName) {
+        super(id, owner, condition, startingPrice, lowEstimate, highEstimate);
         this.typeOfToy = typeOfToy;
         this.name = name;
         this.collectionName = collectionName;
@@ -81,41 +82,27 @@ public class Toy extends Collectible {
         }
 
         try {
-            // Parse common fields from the CSV
             String id = data[1].trim();
             String typeOfToy = data[2].trim();
             String name = data[3].trim();
 
-            // Parse integers for estimates
             int lowEstimate = Integer.parseInt(data[4].trim());
             int highEstimate = Integer.parseInt(data[5].trim());
 
             String owner = data[6].trim();
             String condition = data[7].trim();
 
-            // Validate 'condition'
-            if (!condition.equalsIgnoreCase("Mint") &&
-                    !condition.equalsIgnoreCase("Restored") &&
-                    !condition.equalsIgnoreCase("Needs Restoring")) {
-                throw new IllegalArgumentException("Invalid condition: " + condition);
-            }
-
-            // Parse starting price
             double startingPrice = Double.parseDouble(data[8].trim());
             if (startingPrice < 0) {
                 throw new IllegalArgumentException("Starting price cannot be negative.");
             }
 
-            // Parse collectionName (optional)
             String collectionName = null;
             if (data.length == 10) {
                 collectionName = data[9].trim();
             }
 
-            // Create YearEstimate object
-            YearEstimate yearEstimate = new YearEstimate(lowEstimate, highEstimate);
-
-            return new Toy(id, owner, condition, startingPrice, yearEstimate, typeOfToy, name, collectionName);
+            return new Toy(id, owner, condition, startingPrice, lowEstimate, highEstimate, typeOfToy, name, collectionName);
 
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid number format in Toy data: " + e.getMessage());

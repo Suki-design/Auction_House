@@ -14,14 +14,15 @@ public class Sculpture extends Collectible {
      * @param owner         The current owner of the item.
      * @param condition     The condition of the item ("Mint", "Restored", "Needs Restoring").
      * @param startingPrice The starting price for the auction.
-     * @param yearEstimate  The estimated years of the item's origin.
+     * @param lowEstimate   The lower bound of the year estimate.
+     * @param highEstimate  The upper bound of the year estimate.
      * @param subject       The subject the sculpture represents.
      * @param material      The material of the sculpture.
      * @param height        The height of the sculpture in meters.
      */
-    public Sculpture(String id, String owner, String condition, double startingPrice, YearEstimate yearEstimate,
-                     String subject, String material, double height) {
-        super(id, owner, condition, startingPrice, yearEstimate);
+    public Sculpture(String id, String owner, String condition, double startingPrice, int lowEstimate, int highEstimate,
+    String subject, String material, double height) {
+        super(id, owner, condition, startingPrice, lowEstimate, highEstimate);
         this.subject = subject;
         this.material = material;
         this.height = height;
@@ -100,55 +101,27 @@ public class Sculpture extends Collectible {
             String subject = data[2].trim();
             String material = data[3].trim();
 
-            // Parse double for height
-            double height;
-            try {
-                height = Double.parseDouble(data[4].trim());
-                if (height <= 0) {
-                    throw new IllegalArgumentException("Height must be a positive value.");
-                }
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid height: " + data[4]);
+            double height = Double.parseDouble(data[4].trim());
+            if (height <= 0) {
+                throw new IllegalArgumentException("Height must be a positive value.");
             }
 
-            // Parse integers for estimates
-            int lowEstimate;
-            int highEstimate;
-            try {
-                lowEstimate = Integer.parseInt(data[5].trim());
-                highEstimate = Integer.parseInt(data[6].trim());
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid year estimate values: " + e.getMessage());
-            }
+            int lowEstimate = Integer.parseInt(data[5].trim());
+            int highEstimate = Integer.parseInt(data[6].trim());
 
             String owner = data[7].trim();
             String condition = data[8].trim();
 
-            // Validate 'condition'
-            if (!condition.equalsIgnoreCase("Mint") &&
-                    !condition.equalsIgnoreCase("Restored") &&
-                    !condition.equalsIgnoreCase("Needs Restoring")) {
-                throw new IllegalArgumentException("Invalid condition: " + condition);
+            double startingPrice = Double.parseDouble(data[9].trim());
+            if (startingPrice < 0) {
+                throw new IllegalArgumentException("Starting price cannot be negative.");
             }
 
-            // Parse starting price
-            double startingPrice;
-            try {
-                startingPrice = Double.parseDouble(data[9].trim());
-                if (startingPrice < 0) {
-                    throw new IllegalArgumentException("Starting price cannot be negative.");
-                }
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid starting price: " + data[9]);
-            }
-
-            // Create YearEstimate object
-            YearEstimate yearEstimate = new YearEstimate(lowEstimate, highEstimate);
-
-            return new Sculpture(id, owner, condition, startingPrice, yearEstimate,
+            return new Sculpture(id, owner, condition, startingPrice, lowEstimate, highEstimate,
                     subject, material, height);
+
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid number format in Toy data: " + e.getMessage());
+            throw new IllegalArgumentException("Invalid number format in Sculpture data: " + e.getMessage());
         }
     }
 

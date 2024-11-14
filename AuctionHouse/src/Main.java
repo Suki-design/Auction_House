@@ -36,13 +36,13 @@ public class Main {
         // Load sample data using the loadData method of the DataLoader class
 
         // 1. Valid CSV File
-        //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\valid_data.csv", collection);
+        dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\valid_data.csv", collection);
 
         // 2. CSV File with Missing Fields
         //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\missing_fields.csv", collection);
 
         // 3. CSV File with Invalid Number Formats
-        dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\invalid_numbers.csv", collection);
+        //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\invalid_numbers.csv", collection);
 
         // 4. CSV File with Unexpected Condition Values
         //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\unexpected_values.csv", collection);

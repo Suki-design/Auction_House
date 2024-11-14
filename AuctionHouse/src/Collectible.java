@@ -6,12 +6,16 @@ public abstract class Collectible {
     private YearEstimate yearEstimate;
 
     // Constructor
-    public Collectible(String id, String owner, String condition, double startingPrice, YearEstimate yearEstimate) {
+    public Collectible(String id, String owner, String condition, double startingPrice, int lowEstimate, int highEstimate) {
         this.id = id;
         this.owner = owner;
-        this.condition = condition;
+        setCondition(condition);
         this.startingPrice = startingPrice;
-        this.yearEstimate = yearEstimate;
+        this.yearEstimate = createYearEstimate(lowEstimate, highEstimate);
+    }
+
+    private YearEstimate createYearEstimate(int lowEstimate, int highEstimate) {
+        return new YearEstimate(lowEstimate, highEstimate);
     }
 
     public String getId() {
@@ -31,6 +35,9 @@ public abstract class Collectible {
     }
 
     public void setCondition(String condition) {
+        if (!isValidCondition(condition)) {
+            throw new IllegalArgumentException("Invalid condition: " + condition);
+        }
         this.condition = condition;
     }
 
@@ -52,5 +59,12 @@ public abstract class Collectible {
     @Override
     public String toString() {
         return "ID: " + id + ", Owner: " + owner + ", Condition: " + condition + ", Starting Price: $" + String.format("%.2f", startingPrice) + ", " + yearEstimate.toString();
+    }
+
+    // Static method to validate condition
+    public static boolean isValidCondition(String condition) {
+        return condition.equalsIgnoreCase("Mint") ||
+               condition.equalsIgnoreCase("Restored") ||
+               condition.equalsIgnoreCase("Needs Restoring");
     }
 }

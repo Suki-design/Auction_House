@@ -3,7 +3,10 @@ public class YearEstimate {
     private int highEstimate;
 
     // Constructor
-    public YearEstimate(int lowEstimate, int highEstimate) {
+    YearEstimate(int lowEstimate, int highEstimate) {
+        if (lowEstimate > highEstimate) {
+            throw new IllegalArgumentException("Low estimate cannot be higher than high estimate.");
+        }
         this.lowEstimate = lowEstimate;
         this.highEstimate = highEstimate;
     }

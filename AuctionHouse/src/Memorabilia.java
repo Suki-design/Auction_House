@@ -15,15 +15,16 @@ public class Memorabilia extends Collectible {
      * @param owner                 The current owner of the item.
      * @param condition             The condition of the item ("Mint", "Restored", "Needs Restoring").
      * @param startingPrice         The starting price for the auction.
-     * @param yearEstimate          The estimated years of the item's origin.
+     * @param lowEstimate           The lower bound of the year estimate.
+     * @param highEstimate          The upper bound of the year estimate.
      * @param personalityName       The name of the associated personality.
      * @param personalityOccupation The occupation of the personality.
      * @param objectType            The type of object.
      * @param isAutographed         True if the item is autographed; false otherwise.
      */
-    public Memorabilia(String id, String owner, String condition, double startingPrice, YearEstimate yearEstimate,
-                       String personalityName, String personalityOccupation, String objectType, boolean isAutographed) {
-        super(id, owner, condition, startingPrice, yearEstimate);
+    public Memorabilia(String id, String owner, String condition, double startingPrice, int lowEstimate, int highEstimate,
+    String personalityName, String personalityOccupation, String objectType, boolean isAutographed) {
+        super(id, owner, condition, startingPrice, lowEstimate, highEstimate);
         this.personalityName = personalityName;
         this.personalityOccupation = personalityOccupation;
         this.objectType = objectType;
@@ -102,42 +103,21 @@ public class Memorabilia extends Collectible {
         }
 
         try {
-            // Parse common fields from the superclass
             String id = data[1].trim();
-            String owner = data[8].trim();
-            String condition = data[9].trim();
-            double startingPrice = Double.parseDouble(data[10].trim());
-
-            // Validate 'condition'
-            if (!condition.equalsIgnoreCase("Mint") &&
-                    !condition.equalsIgnoreCase("Restored") &&
-                    !condition.equalsIgnoreCase("Needs Restoring")) {
-                throw new IllegalArgumentException("Invalid condition: " + condition);
-            }
-
-            // Parse year estimates
-            int lowEstimate = Integer.parseInt(data[6].trim());
-            int highEstimate = Integer.parseInt(data[7].trim());
-
-            YearEstimate yearEstimate = new YearEstimate(lowEstimate, highEstimate);
-
-            // Parse specific fields
             String personalityName = data[2].trim();
             String personalityOccupation = data[3].trim();
             String objectType = data[4].trim();
 
-            // Parse boolean for isAutographed
-            String isAutographedStr = data[5].trim().toLowerCase();
-            boolean isAutographed;
-            if (isAutographedStr.equals("true") || isAutographedStr.equals("yes")) {
-                isAutographed = true;
-            } else if (isAutographedStr.equals("false") || isAutographedStr.equals("no")) {
-                isAutographed = false;
-            } else {
-                throw new IllegalArgumentException("Invalid value for isAutographed: " + data[5]);
-            }
+            boolean isAutographed = Boolean.parseBoolean(data[5].trim());
 
-            return new Memorabilia(id, owner, condition, startingPrice, yearEstimate,
+            int lowEstimate = Integer.parseInt(data[6].trim());
+            int highEstimate = Integer.parseInt(data[7].trim());
+
+            String owner = data[8].trim();
+            String condition = data[9].trim();
+            double startingPrice = Double.parseDouble(data[10].trim());
+
+            return new Memorabilia(id, owner, condition, startingPrice, lowEstimate, highEstimate,
                     personalityName, personalityOccupation, objectType, isAutographed);
 
         } catch (NumberFormatException e) {

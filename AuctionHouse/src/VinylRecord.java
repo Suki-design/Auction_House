@@ -15,16 +15,17 @@ public class VinylRecord extends Collectible {
      * @param owner         The current owner of the item.
      * @param condition     The condition of the item
      * @param startingPrice The starting price for the auction.
-     * @param yearEstimate  The estimated years of the item's origin.
+     * @param lowEstimate   The lower bound of the year estimate.
+     * @param highEstimate  The upper bound of the year estimate.
      * @param albumName     The name of the album.
      * @param artist        The artist of the album.
      * @param musicGenre    The music genre of the album.
      * @param diameter      The diameter of the vinyl record in inches (7, 10, or 12).
      * @throws IllegalArgumentException If the diameter is not 7, 10, or 12 inches.
      */
-    public VinylRecord(String id, String owner, String condition, double startingPrice, YearEstimate yearEstimate,
-                       String albumName, String artist, String musicGenre, int diameter) {
-        super(id, owner, condition, startingPrice, yearEstimate);
+    public VinylRecord(String id, String owner, String condition, double startingPrice, int lowEstimate, int highEstimate,
+    String albumName, String artist, String musicGenre, int diameter) {
+        super(id, owner, condition, startingPrice, lowEstimate, highEstimate);
         this.albumName = albumName;
         this.artist = artist;
         this.musicGenre = musicGenre;
@@ -112,55 +113,27 @@ public class VinylRecord extends Collectible {
             String artist = data[3].trim();
             String musicGenre = data[4].trim();
 
-            // Parse integer for diameter
-            int diameter;
-            try {
-                diameter = Integer.parseInt(data[5].trim());
-                if (diameter <= 0) {
-                    throw new IllegalArgumentException("Diameter must be a positive value.");
-                }
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid diameter: " + data[5]);
+            int diameter = Integer.parseInt(data[5].trim());
+            if (diameter <= 0) {
+                throw new IllegalArgumentException("Diameter must be a positive value.");
             }
 
-            // Parse integers for estimates
-            int lowEstimate;
-            int highEstimate;
-            try {
-                lowEstimate = Integer.parseInt(data[6].trim());
-                highEstimate = Integer.parseInt(data[7].trim());
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid year estimate values: " + e.getMessage());
-            }
+            int lowEstimate = Integer.parseInt(data[6].trim());
+            int highEstimate = Integer.parseInt(data[7].trim());
 
             String owner = data[8].trim();
             String condition = data[9].trim();
 
-            // Validate 'condition'
-            if (!condition.equalsIgnoreCase("Mint") &&
-                    !condition.equalsIgnoreCase("Restored") &&
-                    !condition.equalsIgnoreCase("Needs Restoring")) {
-                throw new IllegalArgumentException("Invalid condition: " + condition);
+            double startingPrice = Double.parseDouble(data[10].trim());
+            if (startingPrice < 0) {
+                throw new IllegalArgumentException("Starting price cannot be negative.");
             }
 
-            // Parse starting price
-            double startingPrice;
-            try {
-                startingPrice = Double.parseDouble(data[10].trim());
-                if (startingPrice < 0) {
-                    throw new IllegalArgumentException("Starting price cannot be negative.");
-                }
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid starting price: " + data[10]);
-            }
-
-            // Create YearEstimate object
-            YearEstimate yearEstimate = new YearEstimate(lowEstimate, highEstimate);
-
-            return new VinylRecord(id, owner, condition, startingPrice, yearEstimate,
+            return new VinylRecord(id, owner, condition, startingPrice, lowEstimate, highEstimate,
                     albumName, artist, musicGenre, diameter);
+
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid number format in Toy data: " + e.getMessage());
+            throw new IllegalArgumentException("Invalid number format in VinylRecord data: " + e.getMessage());
         }
     }
 
