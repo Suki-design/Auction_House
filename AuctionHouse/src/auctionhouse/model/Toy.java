@@ -1,5 +1,7 @@
+package auctionhouse.model;
+
 /**
- * Represents a Toy collectible item.
+ * Represents a auctionhouse.model.Toy collectible item.
  */
 public class Toy extends Collectible {
     private String typeOfToy;       // e.g., car, figurine, card

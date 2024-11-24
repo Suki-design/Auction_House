@@ -1,3 +1,5 @@
+package auctionhouse.model;
+
 /**
  * Creator class responsible for creating Collectible objects based on their type.
  */

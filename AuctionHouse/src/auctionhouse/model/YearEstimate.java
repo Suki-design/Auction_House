@@ -1,3 +1,5 @@
+package auctionhouse.model;
+
 public class YearEstimate {
     private int lowEstimate;
     private int highEstimate;

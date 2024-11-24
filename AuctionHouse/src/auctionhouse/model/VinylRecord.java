@@ -1,3 +1,5 @@
+package auctionhouse.model;
+
 /**
  * Represents a vinyl record, which is a type of Collectible.
  * Contains specific attributes related to vinyl records.

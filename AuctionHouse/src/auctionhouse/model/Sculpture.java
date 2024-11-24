@@ -1,3 +1,5 @@
+package auctionhouse.model;
+
 /**
  * Represents a sculpture, which is a type of Collectible.
  * Contains specific attributes related to sculptures.

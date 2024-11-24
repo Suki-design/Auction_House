@@ -1,25 +1,27 @@
+package auctionhouse.model;
+
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Comparator;
 
 /**
- * Manages a collection of Collectible items.
+ * Manages a collection of auctionhouse.model.Collectible items.
  */
 public class CollectibleCollection {
     private ArrayList<Collectible> items;
 
     /**
-     * Constructs a new CollectibleCollection.
+     * Constructs a new auctionhouse.model.CollectibleCollection.
      */
     public CollectibleCollection() {
         items = new ArrayList<>();
     }
 
     /**
-     * Adds a Collectible item to the collection if it doesn't already exist.
+     * Adds a auctionhouse.model.Collectible item to the collection if it doesn't already exist.
      *
-     * @param item The Collectible item to add.
+     * @param item The auctionhouse.model.Collectible item to add.
      * @return true if the item was added; false if it was a duplicate.
      * @throws IllegalArgumentException If the item is null.
      */

@@ -1,3 +1,5 @@
+package auctionhouse.model;
+
 public abstract class Collectible {
     private String id;
     private String owner;

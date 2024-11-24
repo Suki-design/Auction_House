@@ -1,3 +1,5 @@
+package auctionhouse.model;
+
 /**
  * Represents a memorabilia item, which is a type of Collectible.
  * Contains specific attributes related to memorabilia items.
