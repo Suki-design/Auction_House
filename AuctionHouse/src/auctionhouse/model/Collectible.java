@@ -1,6 +1,6 @@
 package auctionhouse.model;
 
-public abstract class Collectible {
+public abstract class Collectible implements Comparable<Collectible>  {
     private String id;
     private String owner;
     private String condition; // "Mint", "Restored", "Needs Restoring"
@@ -18,6 +18,10 @@ public abstract class Collectible {
 
     private YearEstimate createYearEstimate(int lowEstimate, int highEstimate) {
         return new YearEstimate(lowEstimate, highEstimate);
+    }
+
+    public int compareTo(Collectible other) {
+        return this.id.compareTo(other.id);
     }
 
     public String getId() {
