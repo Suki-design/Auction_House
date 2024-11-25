@@ -20,15 +20,16 @@ public class CollectibleGUI extends JFrame implements ActionListener {
     private DefaultListModel<String> collectibleListModel;
     private CollectibleCollection collection;
     private ArrayList<Collectible> collectibles;
-
+    private String dataFilename;
     /**
      * Constructor
      * @param title      frame title
      * @param collection the collection of collectibles to manage
      */
-    public CollectibleGUI(String title, CollectibleCollection collection) {
+    public CollectibleGUI(String title, CollectibleCollection collection, String dataFilename) {
         super(title);
         this.collection = collection;
+        this.dataFilename = dataFilename;
         this.setSize(600, 400);
         this.setLocation(100, 100);
         this.makeLayout();
@@ -135,9 +136,17 @@ public class CollectibleGUI extends JFrame implements ActionListener {
             collection.generateStatisticsSummary(filename);
             JOptionPane.showMessageDialog(this, "Statistics summary generated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else if (command.equals("save")) {
-            String saveFilename = "updated_data.csv";
-            collection.saveData(saveFilename);
-            JOptionPane.showMessageDialog(this, "Data saved to " + saveFilename, "Data Saved", JOptionPane.INFORMATION_MESSAGE);
+            int decision = JOptionPane.showConfirmDialog(this, "Are you sure you want to save?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (decision == JOptionPane.YES_OPTION){
+                try{
+                    collection.saveData(dataFilename);
+                    JOptionPane.showMessageDialog(this, "Saved" ,"Data Saved", JOptionPane.INFORMATION_MESSAGE);
+                }catch (IOException e){
+                    JOptionPane.showMessageDialog(this, "Saving Error", "Save Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Save Cancelled", "Save Cancel ", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 }
