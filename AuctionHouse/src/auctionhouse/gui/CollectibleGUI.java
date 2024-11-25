@@ -1,12 +1,11 @@
 package auctionhouse.gui;
-
 import auctionhouse.model.Collectible;
 import auctionhouse.model.CollectibleCollection;
 import auctionhouse.model.PriceComparator;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -16,7 +15,7 @@ import java.util.Collections;
  */
 public class CollectibleGUI extends JFrame implements ActionListener {
 
-    private JButton moreInfoButton, editButton, sortByIdButton, sortByPriceButton, generateStatsButton, saveButton;;
+    private JButton moreInfoButton, editButton, sortByIdButton, sortByPriceButton, generateStatsButton, saveButton;
     private JList<String> collectibleList;
     private DefaultListModel<String> collectibleListModel;
     private CollectibleCollection collection;
@@ -59,12 +58,11 @@ public class CollectibleGUI extends JFrame implements ActionListener {
         // Add components to containers
         top.add(moreInfoButton);
         top.add(editButton);
-
         bottom.add(sortByIdButton);
         bottom.add(sortByPriceButton);
         bottom.add(generateStatsButton);
         bottom.add(saveButton);
-        // Add containers to frame
+        //add containers to frame
         this.add(top, BorderLayout.NORTH);
         this.add(bottom, BorderLayout.SOUTH);
         this.add(scrollList, BorderLayout.CENTER);
@@ -104,47 +102,43 @@ public class CollectibleGUI extends JFrame implements ActionListener {
      * Event handler for the button clicks
      * @param event the event to be processed
      */
-    @Override
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
-        int selectedIndex = collectibleList.getSelectedIndex();
-        if (selectedIndex != -1) {
+        if (command.equals("moreInfo") && collectibleList.getSelectedIndex() != -1) {
+            int selectedIndex = collectibleList.getSelectedIndex();
             Collectible selected = collectibles.get(selectedIndex);
-            if (command.equals("moreInfo")) {
-                JOptionPane.showMessageDialog(this, selected.toString(), "More Info", JOptionPane.INFORMATION_MESSAGE);
-            } else if (command.equals("edit")) {
-                String newPriceStr = JOptionPane.showInputDialog(this, "Enter new price:", selected.getStartingPrice());
-                String newCondition = JOptionPane.showInputDialog(this, "Enter new condition:", selected.getCondition());
-                try {
-                    double newPrice = Double.parseDouble(newPriceStr);
-                    selected.setStartingPrice(newPrice);
-                    selected.setCondition(newCondition);
-                    // Update the display of the edited item
-                    collectibleListModel.set(selectedIndex, selected.shortDescription());
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(this, "Invalid price value", "Error", JOptionPane.ERROR_MESSAGE);
-                } catch (IllegalArgumentException e) {
-                    JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
+            JOptionPane.showMessageDialog(this, selected.toString(), "More Info", JOptionPane.INFORMATION_MESSAGE);
+        } else if (command.equals("edit") && collectibleList.getSelectedIndex() != -1) {
+            int selectedIndex = collectibleList.getSelectedIndex();
+            Collectible selected = collectibles.get(selectedIndex);
+            String newPriceStr = JOptionPane.showInputDialog(this, "Type in new price:", selected.getStartingPrice());
+            String newCondition = JOptionPane.showInputDialog(this, "Type in new condition:", selected.getCondition());
+            try {
+                double newPrice = Double.parseDouble(newPriceStr);
+                selected.setStartingPrice(newPrice);
+                selected.setCondition(newCondition);
+                // update the display
+                collectibleListModel.set(selectedIndex, selected.shortDescription());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Invalid price format entered", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select an item first.", "No Selection", JOptionPane.WARNING_MESSAGE);
-        }
-        if (command.equals("sortById")) {
+        } else if (command.equals("sortById")) {
             Collections.sort(collectibles);
             setCollectibleListContent(collectibles);
         } else if (command.equals("sortByPrice")) {
             collectibles.sort(new PriceComparator());
             setCollectibleListContent(collectibles);
         } else if (command.equals("generateStats")) {
-            // Handle "Generate Statistics" button click
             String filename = "statistics_summary.txt";
             collection.generateStatisticsSummary(filename);
             JOptionPane.showMessageDialog(this, "Statistics summary generated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-        } else if (command.equals("save")) {
-            // Handle "Save" button click
-            String tempFilename = "updated_data.csv";
-            collection.saveData(tempFilename);
-            JOptionPane.showMessageDialog(this, "Data saved to " + tempFilename, "Data Saved", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
+//        } else if (command.equals("save")) {
+//            String saveFilename = "updated_data.csv";
+//            collection.saveData(saveFilename);
+//            JOptionPane.showMessageDialog(this, "Data saved to " + saveFilename, "Data Saved", JOptionPane.INFORMATION_MESSAGE);
+//    }
 }
