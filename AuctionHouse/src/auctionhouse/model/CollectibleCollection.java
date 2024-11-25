@@ -427,14 +427,15 @@ public class CollectibleCollection {
      *
      * @param filename The name of the file to save the data to.
      */
-    public void saveData(String filename) {
+    public void saveData(String filename) throws IOException {
         try (FileWriter writer = new FileWriter(filename)) {
             for (Collectible item : items) {
                 writer.write(item.toCSV() + "\n");
             }
-            System.out.println("Data saved in " + filename);
+            System.out.println("Data saved to " + filename);
         } catch (IOException e) {
             System.out.println("An error occurred " + e.getMessage());
-        }
+    }
     }
 }
+

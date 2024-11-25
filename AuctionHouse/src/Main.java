@@ -4,36 +4,30 @@ import auctionhouse.model.DataLoader;
 
 public class Main {
     public static void main(String[] args) {
-        // Initialize the generic auctionhouse.model.CollectibleCollection
+        // Initialize the CollectibleCollection
         CollectibleCollection collection = new CollectibleCollection();
         DataLoader dataLoader = new DataLoader();
 
         // 1. Valid CSV File
-        dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\valid_data.csv", collection);
+        String dataFilename = "C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\valid_data.csv";
 
         // 2. CSV File with Missing Fields
-        //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\missing_fields.csv", collection);
+        //String dataFilename = ("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\missing_fields.csv";
 
         // 3. CSV File with Invalid Number Formats
-        //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\invalid_numbers.csv", collection);
+        //String dataFilename = ("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\invalid_numbers.csv";
 
         // 4. CSV File with Unexpected Condition Values
-        //dataLoader.loadData("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\unexpected_values.csv", collection);
+        //String dataFilename = ("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\unexpected_values.csv";
 
-        // Display the number of items in the collection
-        //System.out.println("Total items in collection: " + collection.getNumberOfItems());
-
-        // Display all items using the displayAllItems method
-        //collection.displayAllItems();
-
-        // Print out unique owners in the collection
-        //System.out.println("Unique owners in the collection: " + collection.getUniqueOwners());
-
-        // Generate the statistics summary
         //collection.generateStatisticsSummary("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\statistics_summary.txt");
 
+        // Load data from the file
+        dataLoader.loadData(dataFilename, collection);
+
+
         // Create the GUI and set its content
-        CollectibleGUI gui = new CollectibleGUI("Auction House", collection);
+        CollectibleGUI gui = new CollectibleGUI("Auction House", collection, dataFilename);
         gui.setVisible(true);
         gui.setCollectibleListContent(collection.getItems());
 
