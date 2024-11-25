@@ -421,4 +421,20 @@ public class CollectibleCollection {
             System.out.println("An error occurred while writing the statistics summary to file: " + e.getMessage());
         }
     }
+
+    /**
+     * Saves the collection data to a CSV file.
+     *
+     * @param filename The name of the file to save the data to.
+     */
+    public void saveData(String filename) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            for (Collectible item : items) {
+                writer.write(item.toCSV() + "\n");
+            }
+            System.out.println("Data saved in " + filename);
+        } catch (IOException e) {
+            System.out.println("An error occurred " + e.getMessage());
+        }
+    }
 }
