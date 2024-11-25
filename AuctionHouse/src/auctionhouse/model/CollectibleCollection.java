@@ -6,10 +6,17 @@ import java.io.IOException;
 import java.util.Comparator;
 
 /**
- * Manages a collection of auctionhouse.model.Collectible items.
+ * Manages a collection of Collectible items.
  */
 public class CollectibleCollection {
     private ArrayList<Collectible> items;
+
+    /**
+     * Returns the list of collectible items.
+     */
+    public ArrayList<Collectible> getItems() {
+        return items;
+    }
 
     /**
      * Constructs a new auctionhouse.model.CollectibleCollection.
