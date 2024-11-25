@@ -123,4 +123,16 @@ public class Toy extends Collectible {
                 ", Name: " + name +
                 collectionInfo;
     }
+
+    @Override
+    public String toCSV() {
+        String collectionInfo = (collectionName != null && !collectionName.isEmpty()) ? collectionName : "";
+        return String.join(",",
+                "Toy",                      // Type of Collectible
+                super.toCSV(),              // Shared attributes
+                name,
+                typeOfToy,
+                collectionInfo
+        );
+    }
 }

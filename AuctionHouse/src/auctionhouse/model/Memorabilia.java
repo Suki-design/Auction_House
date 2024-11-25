@@ -139,4 +139,17 @@ public class Memorabilia extends Collectible {
                 ", Object Type: " + objectType +
                 ", Autographed: " + isAutographed;
     }
+
+    @Override
+    public String toCSV() {
+        return String.join(",",
+                "Memorabilia",
+                super.toCSV(),
+                personalityName,
+                personalityOccupation,
+                objectType,
+                String.valueOf(isAutographed())
+        );
+    }
+
 }

@@ -139,4 +139,15 @@ public class Sculpture extends Collectible {
                 ", Material: " + material +
                 ", Height: " + height + " meters";
     }
+
+    @Override
+    public String toCSV() {
+        return String.join(",",
+                "Sculpture",
+                super.toCSV(),
+                subject,
+                material,
+                String.valueOf(height)
+        );
+    }
 }

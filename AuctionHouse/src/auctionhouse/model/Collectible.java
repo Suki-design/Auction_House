@@ -62,6 +62,18 @@ public abstract class Collectible implements Comparable<Collectible>  {
     // Abstract method
     public abstract String shortDescription();
 
+
+    public String toCSV(){
+        return String.join(",",
+                getId(),
+                getOwner(),
+                getCondition(),
+                String.valueOf(getStartingPrice()),
+                String.valueOf(getYearEstimate().getLowEstimate()),
+                String.valueOf(getYearEstimate().getHighEstimate())
+        );
+    }
+
     @Override
     public String toString() {
         return "ID: " + id + ", Owner: " + owner + ", Condition: " + condition + ", Starting Price: $" + String.format("%.2f", startingPrice) + ", " + yearEstimate.toString();

@@ -152,4 +152,16 @@ public class VinylRecord extends Collectible {
                 ", Music Genre: " + musicGenre +
                 ", Diameter: " + diameter + " inches";
     }
+
+    @Override
+    public String toCSV() {
+        return String.join(",",
+                "VinylRecord",
+                super.toCSV(),
+                albumName,
+                artist,
+                musicGenre,
+                String.valueOf(diameter)
+        );
+    }
 }
