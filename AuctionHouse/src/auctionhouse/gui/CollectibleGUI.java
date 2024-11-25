@@ -16,7 +16,7 @@ import java.util.Collections;
  */
 public class CollectibleGUI extends JFrame implements ActionListener {
 
-    private JButton moreInfoButton, editButton, sortByIdButton, sortByPriceButton;
+    private JButton moreInfoButton, editButton, sortByIdButton, sortByPriceButton, generateStatsButton, saveButton;;
     private JList<String> collectibleList;
     private DefaultListModel<String> collectibleListModel;
     private CollectibleCollection collection;
@@ -50,6 +50,8 @@ public class CollectibleGUI extends JFrame implements ActionListener {
         sortByPriceButton = new JButton("Sort by Price");
         collectibleListModel = new DefaultListModel<>();
         collectibleList = new JList<>(collectibleListModel);
+        generateStatsButton = new JButton("Generate Statistics");
+        saveButton = new JButton("Save");
         // Create containers
         JPanel top = new JPanel();
         JPanel bottom = new JPanel();
@@ -57,8 +59,11 @@ public class CollectibleGUI extends JFrame implements ActionListener {
         // Add components to containers
         top.add(moreInfoButton);
         top.add(editButton);
+
         bottom.add(sortByIdButton);
         bottom.add(sortByPriceButton);
+        bottom.add(generateStatsButton);
+        bottom.add(saveButton);
         // Add containers to frame
         this.add(top, BorderLayout.NORTH);
         this.add(bottom, BorderLayout.SOUTH);
@@ -73,10 +78,14 @@ public class CollectibleGUI extends JFrame implements ActionListener {
         editButton.setActionCommand("edit");
         sortByIdButton.setActionCommand("sortById");
         sortByPriceButton.setActionCommand("sortByPrice");
+        generateStatsButton.setActionCommand("generateStats");
+        saveButton.setActionCommand("save");
         moreInfoButton.addActionListener(this);
         editButton.addActionListener(this);
         sortByIdButton.addActionListener(this);
         sortByPriceButton.addActionListener(this);
+        generateStatsButton.addActionListener(this);
+        saveButton.addActionListener(this);
     }
 
     /**
@@ -127,6 +136,15 @@ public class CollectibleGUI extends JFrame implements ActionListener {
         } else if (command.equals("sortByPrice")) {
             collectibles.sort(new PriceComparator());
             setCollectibleListContent(collectibles);
-        }
+        } else if (command.equals("generateStats")) {
+            // Handle "Generate Statistics" button click
+            String filename = "statistics_summary.txt";
+            collection.generateStatisticsSummary(filename);
+            JOptionPane.showMessageDialog(this, "Statistics summary generated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else if (command.equals("save")) {
+            // Handle "Save" button click
+            String tempFilename = "updated_data.csv";
+            collection.saveData(tempFilename);
+            JOptionPane.showMessageDialog(this, "Data saved to " + tempFilename, "Data Saved", JOptionPane.INFORMATION_MESSAGE);
     }
 }
