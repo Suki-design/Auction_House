@@ -134,11 +134,10 @@ public class CollectibleGUI extends JFrame implements ActionListener {
             String filename = "statistics_summary.txt";
             collection.generateStatisticsSummary(filename);
             JOptionPane.showMessageDialog(this, "Statistics summary generated successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else if (command.equals("save")) {
+            String saveFilename = "updated_data.csv";
+            collection.saveData(saveFilename);
+            JOptionPane.showMessageDialog(this, "Data saved to " + saveFilename, "Data Saved", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-//        } else if (command.equals("save")) {
-//            String saveFilename = "updated_data.csv";
-//            collection.saveData(saveFilename);
-//            JOptionPane.showMessageDialog(this, "Data saved to " + saveFilename, "Data Saved", JOptionPane.INFORMATION_MESSAGE);
-//    }
 }
