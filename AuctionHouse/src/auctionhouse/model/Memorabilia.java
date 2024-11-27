@@ -81,7 +81,7 @@ public class Memorabilia extends Collectible {
      */
     @Override
     public String shortDescription() {
-        return "Memorabilia (ID: " + getId() + ", " + personalityName + "'s " + objectType + " Price: "+ getStartingPrice() + ")";
+        return getId() + " Memorabilia: " + personalityName + "'s " + objectType + ", Price: "+ getStartingPrice() + ", Condition: "+getCondition();
     }
 
     /**

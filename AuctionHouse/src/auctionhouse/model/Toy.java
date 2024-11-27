@@ -62,7 +62,7 @@ public class Toy extends Collectible {
      */
     @Override
     public String shortDescription() {
-        return "Toy (ID: " + getId() + ", " + name + " " + typeOfToy + " Price: " + getStartingPrice() +")";
+        return getId() + " Toy: " + name + " " + typeOfToy + ", Price: " + getStartingPrice() +", Condition: "+getCondition();
     }
 
     /**

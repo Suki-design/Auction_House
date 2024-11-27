@@ -85,7 +85,7 @@ public class VinylRecord extends Collectible {
      */
     @Override
     public String shortDescription() {
-        return "VinylRecord (ID: " + getId() + ", " + albumName + " by " + artist +" " + " Price: " + getStartingPrice() +")";
+        return getId() + " VinylRecord: " + albumName + " by " + artist +" " + ", Price: " + getStartingPrice() +", Condition: "+ getCondition();
     }
 
     /**

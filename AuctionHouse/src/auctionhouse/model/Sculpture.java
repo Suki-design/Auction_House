@@ -75,7 +75,7 @@ public class Sculpture extends Collectible {
      */
     @Override
     public String shortDescription() {
-        return "Sculpture (ID: " + getId() + ", " + subject + " in " + material + " Price: " + getStartingPrice() +")";
+        return  getId() + " Sculpture: " + subject + " in " + material + ", Price: " + getStartingPrice() +", Condition: "+ getCondition();
     }
 
     /**
