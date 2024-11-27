@@ -9,7 +9,7 @@ public class Main {
         DataLoader dataLoader = new DataLoader();
 
         // 1. Valid CSV File
-        String dataFilename = "C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\valid_data.csv";
+        String dataFilename = "AuctionHouse/src/valid_data.csv";
 
         // 2. CSV File with Missing Fields
         //String dataFilename = ("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\missing_fields.csv";
@@ -28,8 +28,8 @@ public class Main {
 
         // Create the GUI and set its content
         CollectibleGUI gui = new CollectibleGUI("Auction House", collection, dataFilename);
-        gui.setVisible(true);
         gui.setCollectibleListContent(collection.getItems());
+        gui.setVisible(true);
 
     }
 }
