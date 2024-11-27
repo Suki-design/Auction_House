@@ -1,5 +1,5 @@
-Memorabilia,027,Elvis Presley,Singer,Guitar,true,1950,1956,Alice,Mint,twenty thousand
-Toy,028,Action Figure,Hot Wheels Car,1985,nineteen eighty-six,Hank,Mint,three hundred,Hot Wheels Collection
-VinylRecord,029,Thriller,Michael Jackson,Pop,twelve,1982,1987,Bob,Mint,fifteen hundred
-Sculpture,030,The Thinker,Marble,one point eight,1900,1905,Carol,Restored,five thousand
-VinylRecord,032,Abbey Road,The Beatles,Rock,12,1969,1973,Alice,Mint,two thousand two hundred
+Memorabilia,001,Alice,Mint,two thousand,1950,1956,Elvis Presley,Singer,Guitar,true
+Memorabilia,002,Bob,Mint,15000.0,1953,1955,Marilyn Monroe,Actress,Dress,true
+Toy,003,Carol,Needs Restoring,six thousand.0,1980,1985,Barbie Doll,Toy,
+Toy,004,David,Mint,300.0,1982,1986,Hot Wheels Car,Car,Hot Wheels Collection
+VinylRecord,005,Bob,Mint,1500.0,nineteen eighty two,1987,Thriller,Michael Jackson,Pop,12
