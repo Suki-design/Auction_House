@@ -87,9 +87,7 @@ public class Sculpture extends Collectible {
      */
     public static Sculpture fromCSV(String[] data) throws IllegalArgumentException {
         // Expected CSV Format for Sculpture:
-        // Type,ID,Subject,Material,Height,LowEstimate,HighEstimate,Owner,Condition,StartingPrice
-        // Example:
-        // Sculpture,005,The Thinker,Marble,1.8,1900,1905,Carol,Restored,5000.00
+        // Type,id, owner, condition, startingPrice, lowEstimate, highEstimate,subject, material, height
 
         final int EXPECTED_ATTRIBUTES = 10; // Including Type
 
@@ -100,23 +98,19 @@ public class Sculpture extends Collectible {
 
         try {
             String id = data[1].trim();
-            String subject = data[2].trim();
-            String material = data[3].trim();
-
-            double height = Double.parseDouble(data[4].trim());
-            if (height <= 0) {
-                throw new IllegalArgumentException("Height must be a positive value.");
-            }
-
-            int lowEstimate = Integer.parseInt(data[5].trim());
-            int highEstimate = Integer.parseInt(data[6].trim());
-
-            String owner = data[7].trim();
-            String condition = data[8].trim();
-
-            double startingPrice = Double.parseDouble(data[9].trim());
+            String owner = data[2].trim();
+            String condition = data[3].trim();
+            double startingPrice = Double.parseDouble(data[4].trim());
             if (startingPrice < 0) {
                 throw new IllegalArgumentException("Starting price cannot be negative.");
+            }
+            int lowEstimate = Integer.parseInt(data[5].trim());
+            int highEstimate = Integer.parseInt(data[6].trim());
+            String subject = data[7].trim();
+            String material = data[8].trim();
+            double height = Double.parseDouble(data[9].trim());
+            if (height <= 0) {
+                throw new IllegalArgumentException("Height must be a positive value.");
             }
 
             return new Sculpture(id, owner, condition, startingPrice, lowEstimate, highEstimate,

@@ -93,9 +93,7 @@ public class Memorabilia extends Collectible {
      */
     public static Memorabilia fromCSV(String[] data) throws IllegalArgumentException {
         // Expected CSV Format for Memorabilia:
-        // Type,ID,PersonalityName,PersonalityOccupation,ObjectType,IsAutographed,LowEstimate,HighEstimate,Owner,Condition,StartingPrice
-        // Example:
-        // Memorabilia,001,Elvis Presley,Singer,Guitar,true,1950,1956,Alice,Mint,20000.00
+        // Type,id, owner, condition, startingPrice, lowEstimate, highEstimate, personalityName, personalityOccupation, objectType, isAutographed
 
         final int EXPECTED_ATTRIBUTES = 11; // Including Type
 
@@ -106,18 +104,18 @@ public class Memorabilia extends Collectible {
 
         try {
             String id = data[1].trim();
-            String personalityName = data[2].trim();
-            String personalityOccupation = data[3].trim();
-            String objectType = data[4].trim();
-
-            boolean isAutographed = Boolean.parseBoolean(data[5].trim());
-
-            int lowEstimate = Integer.parseInt(data[6].trim());
-            int highEstimate = Integer.parseInt(data[7].trim());
-
-            String owner = data[8].trim();
-            String condition = data[9].trim();
-            double startingPrice = Double.parseDouble(data[10].trim());
+            String owner = data[2].trim();
+            String condition = data[3].trim();
+            double startingPrice = Double.parseDouble(data[4].trim());
+            if (startingPrice < 0) {
+                throw new IllegalArgumentException("Starting price cannot be negative.");
+            }
+            int lowEstimate = Integer.parseInt(data[5].trim());
+            int highEstimate = Integer.parseInt(data[6].trim());
+            String personalityName = data[7].trim();
+            String personalityOccupation = data[8].trim();
+            String objectType = data[9].trim();
+            boolean isAutographed = Boolean.parseBoolean(data[10].trim());
 
             return new Memorabilia(id, owner, condition, startingPrice, lowEstimate, highEstimate,
                     personalityName, personalityOccupation, objectType, isAutographed);

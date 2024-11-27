@@ -74,10 +74,7 @@ public class Toy extends Collectible {
      */
     public static Toy fromCSV(String[] data) throws IllegalArgumentException {
         // Expected CSV Format for Toy:
-        // Type,ID,TypeOfToy,Name,LowEstimate,HighEstimate,Owner,Condition,StartingPrice,CollectionName(optional)
-        // Example:
-        // Toy,002,Vintage Barbie Doll,Toy,Barbie,1980,1985,Carol,Needs Restoring,500.00,
-        // Toy,003,Hot Wheels Car,Car,1982,1986,David,Mint,300.00,Hot Wheels Collection
+        // Type,id, owner, condition, startingPrice, lowEstimate, highEstimate, typeOfToy, name, collectionName(Is optional)
 
         if (data.length < 9) { // Everything else apart from Collection Name should be provided
             throw new IllegalArgumentException("Missing fields for Toy. Expected at least 9 fields, got " + data.length + ".");
@@ -85,20 +82,16 @@ public class Toy extends Collectible {
 
         try {
             String id = data[1].trim();
-            String typeOfToy = data[2].trim();
-            String name = data[3].trim();
-
-            int lowEstimate = Integer.parseInt(data[4].trim());
-            int highEstimate = Integer.parseInt(data[5].trim());
-
-            String owner = data[6].trim();
-            String condition = data[7].trim();
-
-            double startingPrice = Double.parseDouble(data[8].trim());
+            String owner = data[2].trim();
+            String condition = data[3].trim();
+            double startingPrice = Double.parseDouble(data[4].trim());
             if (startingPrice < 0) {
                 throw new IllegalArgumentException("Starting price cannot be negative.");
             }
-
+            int lowEstimate = Integer.parseInt(data[5].trim());
+            int highEstimate = Integer.parseInt(data[6].trim());
+            String typeOfToy = data[7].trim();
+            String name = data[8].trim();
             String collectionName = null;
             if (data.length == 10) {
                 collectionName = data[9].trim();
