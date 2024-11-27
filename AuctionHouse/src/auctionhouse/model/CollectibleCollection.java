@@ -3,13 +3,21 @@ package auctionhouse.model;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Comparator;
+import java.util.Collections;
 
 /**
  * Manages a collection of Collectible items.
  */
 public class CollectibleCollection {
     private ArrayList<Collectible> items;
+
+
+    /**
+     * instantiate the list
+     */
+    public CollectibleCollection() {
+        items = new ArrayList<>();
+    }
 
     /**
      * Returns the list of collectible items.
@@ -19,15 +27,7 @@ public class CollectibleCollection {
     }
 
     /**
-     * Constructs a new auctionhouse.model.CollectibleCollection.
-     */
-    public CollectibleCollection() {
-        items = new ArrayList<>();
-    }
-
-    /**
-     * Adds a auctionhouse.model.Collectible item to the collection if it doesn't already exist.
-     *
+     * Adds a Collectible item to the collection if it is not duplicated
      * @param item The auctionhouse.model.Collectible item to add.
      * @return true if the item was added; false if it was a duplicate.
      * @throws IllegalArgumentException If the item is null.
@@ -42,25 +42,9 @@ public class CollectibleCollection {
         }
         return false;
     }
-
+    
     /**
-     * Displays all collectible items in the collection.
-     */
-    public void displayAllItems() {
-        if (items.isEmpty()) {
-            System.out.println("The collection is empty.");
-            return;
-        }
-        System.out.println("Items in the collection:");
-        for (Collectible item : items) {
-            System.out.println(item.toString());
-            System.out.println(".........................................");
-        }
-    }
-
-    /**
-     * Finds a Collectible item by its ID.
-     *
+     * finds a Collectible item by its ID.
      * @param id The ID of the item to find.
      * @return The Collectible item if found; null if not found.
      */
@@ -76,8 +60,7 @@ public class CollectibleCollection {
     // Query methods
 
     /**
-     * Gets the total number of items in the collection.
-     *
+     * gets the total number of items in the collection.
      * @return The number of items.
      */
     public int getNumberOfItems() {
@@ -85,17 +68,19 @@ public class CollectibleCollection {
     }
 
     /**
-     * Gets the oldest item based on the low year estimate.
-     *
+     * gets the oldest item based on the low year estimate.
      * @return The oldest Collectible item.
      */
     public Collectible getOldestByLowEstimate() {
-        Collectible oldest = null;
-        int oldestLowEstimate = 0;
+        if (items.isEmpty()) return null;
 
-        for (Collectible item : items) {
+        Collectible oldest = items.get(0);
+        int oldestLowEstimate = oldest.getYearEstimate().getLowEstimate();
+
+        for (int i = 1; i < items.size(); i++) {
+            Collectible item = items.get(i);
             int itemLowEstimate = item.getYearEstimate().getLowEstimate();
-            if (oldest == null || itemLowEstimate < oldestLowEstimate) {
+            if (itemLowEstimate < oldestLowEstimate) {
                 oldest = item;
                 oldestLowEstimate = itemLowEstimate;
             }
@@ -104,17 +89,19 @@ public class CollectibleCollection {
     }
 
     /**
-     * Gets the newest item based on the high year estimate.
-     *
+     * gets the newest item based on the high year estimate.
      * @return The newest Collectible item.
      */
     public Collectible getNewestByHighEstimate() {
-        Collectible newest = null;
-        int newestHighEstimate = 0;
+        if (items.isEmpty()) return null;
 
-        for (Collectible item : items) {
+        Collectible newest = items.get(0);
+        int newestHighEstimate = newest.getYearEstimate().getHighEstimate();
+
+        for (int i = 1; i < items.size(); i++) {
+            Collectible item = items.get(i);
             int itemHighEstimate = item.getYearEstimate().getHighEstimate();
-            if (newest == null || itemHighEstimate > newestHighEstimate) {
+            if (itemHighEstimate > newestHighEstimate) {
                 newest = item;
                 newestHighEstimate = itemHighEstimate;
             }
@@ -123,17 +110,19 @@ public class CollectibleCollection {
     }
 
     /**
-     * Gets the oldest item based on the middle year estimate.
-     *
+     * gets the oldest item based on the middle year estimate.
      * @return The oldest Collectible item by middle estimate.
      */
     public Collectible getOldestByMiddleEstimate() {
-        Collectible oldest = null;
-        int oldestMiddleEstimate = 0;
+        if (items.isEmpty()) return null;
 
-        for (Collectible item : items) {
+        Collectible oldest = items.get(0);
+        int oldestMiddleEstimate = oldest.getYearEstimate().getMiddleEstimate();
+
+        for (int i = 1; i < items.size(); i++) {
+            Collectible item = items.get(i);
             int itemMiddleEstimate = item.getYearEstimate().getMiddleEstimate();
-            if (oldest == null || itemMiddleEstimate < oldestMiddleEstimate) {
+            if (itemMiddleEstimate < oldestMiddleEstimate) {
                 oldest = item;
                 oldestMiddleEstimate = itemMiddleEstimate;
             }
@@ -142,17 +131,19 @@ public class CollectibleCollection {
     }
 
     /**
-     * Gets the newest item based on the middle year estimate.
-     *
+     * gets the newest item based on the middle year estimate.
      * @return The newest Collectible item by middle estimate.
      */
     public Collectible getNewestByMiddleEstimate() {
-        Collectible newest = null;
-        int newestMiddleEstimate = 0;
+        if (items.isEmpty()) return null;
 
-        for (Collectible item : items) {
+        Collectible newest = items.get(0);
+        int newestMiddleEstimate = newest.getYearEstimate().getMiddleEstimate();
+
+        for (int i = 1; i < items.size(); i++) {
+            Collectible item = items.get(i);
             int itemMiddleEstimate = item.getYearEstimate().getMiddleEstimate();
-            if (newest == null || itemMiddleEstimate > newestMiddleEstimate) {
+            if (itemMiddleEstimate > newestMiddleEstimate) {
                 newest = item;
                 newestMiddleEstimate = itemMiddleEstimate;
             }
@@ -161,17 +152,19 @@ public class CollectibleCollection {
     }
 
     /**
-     * Gets the most expensive item based on starting price.
-     *
+     * gets the most expensive item based on starting price.
      * @return The most expensive Collectible item.
      */
     public Collectible getMostExpensiveItem() {
-        Collectible mostExpensive = null;
-        double highestPrice = 0.0;
+        if (items.isEmpty()) return null;
 
-        for (Collectible item : items) {
+        Collectible mostExpensive = items.get(0);
+        double highestPrice = mostExpensive.getStartingPrice();
+
+        for (int i = 1; i < items.size(); i++) {
+            Collectible item = items.get(i);
             double itemPrice = item.getStartingPrice();
-            if (mostExpensive == null || itemPrice > highestPrice) {
+            if (itemPrice > highestPrice) {
                 mostExpensive = item;
                 highestPrice = itemPrice;
             }
@@ -180,17 +173,19 @@ public class CollectibleCollection {
     }
 
     /**
-     * Gets the least expensive item based on starting price.
-     *
+     * gets the least expensive item based on starting price.
      * @return The least expensive Collectible item.
      */
     public Collectible getLeastExpensiveItem() {
-        Collectible leastExpensive = null;
-        double lowestPrice = 0.0;
+        if (items.isEmpty()) return null;
 
-        for (Collectible item : items) {
+        Collectible leastExpensive = items.get(0);
+        double lowestPrice = leastExpensive.getStartingPrice();
+
+        for (int i = 1; i < items.size(); i++) {
+            Collectible item = items.get(i);
             double itemPrice = item.getStartingPrice();
-            if (leastExpensive == null || itemPrice < lowestPrice) {
+            if (itemPrice < lowestPrice) {
                 leastExpensive = item;
                 lowestPrice = itemPrice;
             }
@@ -199,24 +194,7 @@ public class CollectibleCollection {
     }
 
     /**
-     * Gets a list of unique owners in the collection.
-     *
-     * @return An ArrayList of owner names.
-     */
-    public ArrayList<String> getUniqueOwners() {
-        ArrayList<String> owners = new ArrayList<>();
-        for (Collectible item : items) {
-            String owner = item.getOwner();
-            if (!owners.contains(owner)) {
-                owners.add(owner);
-            }
-        }
-        return owners;
-    }
-
-    /**
-     * Calculates the average starting price of all items in the collection.
-     *
+     * calculates the average starting price of all items in the collection.
      * @return The average starting price.
      */
     private double calculateAverageStartingPrice() {
@@ -230,7 +208,8 @@ public class CollectibleCollection {
 
     /**
      * Calculates the standard deviation of starting prices.
-     *
+     * Someone solved a similar question on StackOverflow which I have modified to the method below
+     * <a href="https://stackoverflow.com/questions/37930631/standard-deviation-of-an-arraylist">...</a>
      * @return The standard deviation of starting prices.
      */
     private double calculateStandardDeviationStartingPrice() {
@@ -245,8 +224,7 @@ public class CollectibleCollection {
     }
 
     /**
-     * Gets a summary of item counts by condition.
-     *
+     * gets a summary of item counts by condition.
      * @return A string summarizing the counts by condition.
      */
     private String getConditionCount() {
@@ -269,13 +247,29 @@ public class CollectibleCollection {
         conditionSummary.append("Mint: ").append(mintCount).append("\n");
         conditionSummary.append("Restored: ").append(restoredCount).append("\n");
         conditionSummary.append("Needs Restoring: ").append(needsRestoringCount).append("\n");
-
         return conditionSummary.toString();
     }
 
     /**
-     * Generates a statistics summary and writes it to a text file.
-     *
+     * returns the top 3 items with the largest differences between high and low year estimates.
+     */
+    public ArrayList<Collectible> getTopThreeYearEstimateDifferences() {
+        //create a copy of the items in a new arrayList
+        ArrayList<Collectible> sortedItems = new ArrayList<>(items);
+
+        // useYearDifferenceComparator class for sorting
+        Collections.sort(sortedItems, new YearDifferenceComparator());
+        // put the top 3 in a collection
+        ArrayList<Collectible> topThree = new ArrayList<>();
+        for (int i = 0; i < 3 && i < sortedItems.size(); i++) {
+            topThree.add(sortedItems.get(i));
+        }
+        return topThree;
+    }
+
+
+    /**
+     * generates a statistics summary and writes it to a text file.
      * @param filename The name of the file to write the summary to.
      */
     public void generateStatisticsSummary(String filename) {
@@ -377,34 +371,6 @@ public class CollectibleCollection {
 
         // Write the summary to the specified file
         writeToFile(filename, summary.toString());
-    }
-
-    /**
-     * Retrieves the top 3 items with the largest differences between high and low year estimates.
-     *
-     * @return An ArrayList of the top 3 Collectible items.
-     */
-    private ArrayList<Collectible> getTopThreeYearEstimateDifferences() {
-        ArrayList<Collectible> sortedItems = new ArrayList<>(items);
-
-        // Sort the items based on the difference between highEstimate and lowEstimate in descending order
-        sortedItems.sort(new Comparator<Collectible>() {
-            @Override
-            public int compare(Collectible a, Collectible b) {
-                int diffA = a.getYearEstimate().getHighEstimate() - a.getYearEstimate().getLowEstimate();
-                int diffB = b.getYearEstimate().getHighEstimate() - b.getYearEstimate().getLowEstimate();
-                return Integer.compare(diffB, diffA); // Descending order
-            }
-        });
-
-        // Select top 3
-        ArrayList<Collectible> topThree = new ArrayList<>();
-        int count = Math.min(3, sortedItems.size());
-        for (int i = 0; i < count; i++) {
-            topThree.add(sortedItems.get(i));
-        }
-
-        return topThree;
     }
 
     /**
