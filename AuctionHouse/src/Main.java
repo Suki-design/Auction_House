@@ -12,15 +12,13 @@ public class Main {
         String dataFilename = "AuctionHouse/src/valid_data.csv";
 
         // 2. CSV File with Missing Fields
-        //String dataFilename = ("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\missing_fields.csv";
+        //String dataFilename = ("AuctionHouse/src/missing_fields.csv");
 
         // 3. CSV File with Invalid Number Formats
-        //String dataFilename = ("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\invalid_numbers.csv";
+        //String dataFilename = ("AuctionHouse/src/invalid_numbers.csv");
 
         // 4. CSV File with Unexpected Condition Values
-        //String dataFilename = ("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\unexpected_values.csv";
-
-        //collection.generateStatisticsSummary("C:\\Users\\Favour Sukat\\f21sfcode\\coursework\\AuctionHouse\\src\\statistics_summary.txt");
+        //String dataFilename = ("AuctionHouse/src/unexpected_values.csv");
 
         // Load data from the file
         dataLoader.loadData(dataFilename, collection);
