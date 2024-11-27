@@ -65,7 +65,6 @@ public class VinylRecord extends Collectible {
 
     /**
      * Sets the diameter of the vinyl record.
-     *
      * @param diameter The diameter in inches (must be 7, 10, or 12).
      * @throws IllegalArgumentException If the diameter is not 7, 10, or 12 inches.
      */
@@ -98,9 +97,7 @@ public class VinylRecord extends Collectible {
      */
     public static VinylRecord fromCSV(String[] data) throws IllegalArgumentException {
         // Expected CSV Format for VinylRecord:
-        // Type,ID,AlbumName,Artist,MusicGenre,Diameter,LowEstimate,HighEstimate,Owner,Condition,StartingPrice
-        // Example:
-        // VinylRecord,004,Thriller,Michael Jackson,Pop,12,1982,1987,Bob,Mint,1500.00
+        // Type,id, owner, condition, startingPrice, lowEstimate, highEstimate, albumName, artist, musicGenre, diameter
 
         final int EXPECTED_ATTRIBUTES = 11; // Including Type
 
@@ -111,24 +108,20 @@ public class VinylRecord extends Collectible {
 
         try {
             String id = data[1].trim();
-            String albumName = data[2].trim();
-            String artist = data[3].trim();
-            String musicGenre = data[4].trim();
-
-            int diameter = Integer.parseInt(data[5].trim());
-            if (diameter <= 0) {
-                throw new IllegalArgumentException("Diameter must be a positive value.");
-            }
-
-            int lowEstimate = Integer.parseInt(data[6].trim());
-            int highEstimate = Integer.parseInt(data[7].trim());
-
-            String owner = data[8].trim();
-            String condition = data[9].trim();
-
-            double startingPrice = Double.parseDouble(data[10].trim());
+            String owner = data[2].trim();
+            String condition = data[3].trim();
+            double startingPrice = Double.parseDouble(data[4].trim());
             if (startingPrice < 0) {
                 throw new IllegalArgumentException("Starting price cannot be negative.");
+            }
+            int lowEstimate = Integer.parseInt(data[5].trim());
+            int highEstimate = Integer.parseInt(data[6].trim());
+            String albumName = data[7].trim();
+            String artist = data[8].trim();
+            String musicGenre = data[9].trim();
+            int diameter = Integer.parseInt(data[10].trim());
+            if (diameter <= 0) {
+                throw new IllegalArgumentException("Diameter must be a positive value.");
             }
 
             return new VinylRecord(id, owner, condition, startingPrice, lowEstimate, highEstimate,
