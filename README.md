@@ -85,5 +85,6 @@ Refactoring and Class Hierarchy
 **UML Design**
 - Updated the UML class diagram to reflect new structure.
 ## Stage 4
-
-Design notes...
+- Implemented GUI for the Application
+- Implemented a test Plan for getYearEstimateDifference
+- Carried out System Test
