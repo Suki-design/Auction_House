@@ -1,20 +1,20 @@
-Memorabilia,001,Elvis Presley,Singer,Guitar,true,1950,1956,Alice,Mint,20000.00
-Memorabilia,002,Marilyn Monroe,Actress,Dress,true,1953,1955,Bob,Restored,15000.00
-Toy,003,Toy,Barbie Doll,1980,1985,Carol,Needs Restoring,500.00
-Toy,004,Car,Hot Wheels Car,1982,1986,David,Mint,300.00,Hot Wheels Collection
-VinylRecord,005,Thriller,Michael Jackson,Pop,12,1982,1987,Bob,Mint,1500.00
-VinylRecord,006,Back in Black,AC/DC,Rock,12,1980,1985,Alice,Restored,1200.00
-Sculpture,007,The Thinker,Marble,1.8,1900,1905,Carol,Restored,5000.00
-Sculpture,008,David,Bronze,1.75,1500,1510,David,Mint,7500.00
-Memorabilia,009,Bruce Lee,Martial Artist,Uniform,false,1970,1975,Eve,Mint,18000.00
-Toy,010,Model,LEGO Millennium Falcon,2010,2015,Frank,Restored,3500.00,LEGO Star Wars Collection
-VinylRecord,011,Abbey Road,The Beatles,Rock,12,1969,1973,Alice,Mint,2200.00
-Sculpture,012,Venus de Milo,Marble,2.0,1500,1505,Bob,Mint,8000.00
-Memorabilia,013,Bob Dylan,Musician,Guitar,false,1965,1970,Eve,Restored,16000.00
-Toy,014,Play House,Barbie Dreamhouse,2010,2015,Frank,Restored,3500.00
-VinylRecord,015,The Dark Side of the Moon,Pink Floyd,Progressive Rock,12,1973,1978,Grace,Mint,3000.00
-Sculpture,016,The Kiss,Bronze,1.5,1900,1905,Hank,Mint,9000.00
-Memorabilia,017,Albert Einstein,Scientist,Notebook,false,1930,1935,Ivy,Restored,12000.00
-Toy,018,Action Figure,Star Wars Action Figure,1985,1990,Hank,Mint,400.00,Star Wars Collection
-VinylRecord,019,Hotel California,Eagles,Rock,12,1977,1982,Hank,Restored,1800.00
-Sculpture,020,The Little Mermaid,Resin,0.5,2000,2005,Ivy,Mint,6000.00
+Memorabilia,001,Alice,Mint,20000.0,1950,1956,Elvis Presley,Singer,Guitar,true
+Memorabilia,002,Bob,Restored,15000.0,1953,1955,Marilyn Monroe,Actress,Dress,true
+Toy,003,Carol,Needs Restoring,6000.0,1980,1985,Barbie Doll,Toy,
+Toy,004,David,Mint,300.0,1982,1986,Hot Wheels Car,Car,Hot Wheels Collection
+VinylRecord,005,Bob,Mint,1500.0,1982,1987,Thriller,Michael Jackson,Pop,12
+VinylRecord,006,Alice,Restored,1200.0,1980,1985,Back in Black,AC/DC,Rock,12
+Sculpture,007,Carol,Restored,5000.0,1900,1905,The Thinker,Marble,1.8
+Sculpture,008,David,Mint,7500.0,1500,1510,David,Bronze,1.75
+Memorabilia,009,Eve,Mint,18000.0,1970,1975,Bruce Lee,Martial Artist,Uniform,false
+Toy,010,Frank,Restored,3500.0,2010,2015,LEGO Millennium Falcon,Model,LEGO Star Wars Collection
+VinylRecord,011,Alice,Mint,2200.0,1969,1973,Abbey Road,The Beatles,Rock,12
+Sculpture,012,Bob,Mint,8000.0,1500,1505,Venus de Milo,Marble,2.0
+Memorabilia,013,Eve,Restored,16000.0,1965,1970,Bob Dylan,Musician,Guitar,false
+Toy,014,Frank,Restored,3500.0,2010,2015,Barbie Dreamhouse,Play House,
+VinylRecord,015,Grace,Mint,3000.0,1973,1978,The Dark Side of the Moon,Pink Floyd,Progressive Rock,12
+Sculpture,016,Hank,Mint,9000.0,1900,1905,The Kiss,Bronze,1.5
+Memorabilia,017,Ivy,Restored,12000.0,1930,1935,Albert Einstein,Scientist,Notebook,false
+Toy,018,Hank,Mint,400.0,1985,1990,Star Wars Action Figure,Action Figure,Star Wars Collection
+VinylRecord,019,Hank,Restored,1800.0,1977,1982,Hotel California,Eagles,Rock,12
+Sculpture,020,Ivy,Mint,6000.0,2000,2005,The Little Mermaid,Resin,0.5
